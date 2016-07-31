@@ -29,3 +29,15 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
 ## Preparation
 1. Create the build directory C:\php-sdk
 2. Unpack the binary tools archive into this directory, it should contain three sub-directories: bin, script and share
+3. Open the command prompt and enter the build directory:
+<blockquote>cd c:\php-sdk\</blockquote>
+4. Run the buildtree batch script which will create the desired directory structure:
+<blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>
+5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11
+6. Extract the PHP source code (5.6.24) to:
+    * C:\php-sdk\phpdev\vc11\x86
+    * C:\php-sdk\phpdev\vc11\x64
+   For example: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src
+7. Extract dependency libraries to build PHP:
+    * deps-5.6-vc11-x86.7z to C:\php-sdk\phpdev\vc11\x86\
+    * deps-5.6-vc11-x64.7z to C:\php-sdk\phpdev\vc11\x64\

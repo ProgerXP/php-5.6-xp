@@ -24,8 +24,8 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
     * [dependency archive for x64](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/deps-5.6-vc11-x64.7z)
 
 
-# Source Code
+# Setup the build directory
 
 ## Preparation
-1. Create folder C:\php-sdk
-2. Download
+1. Create the build directory C:\php-sdk
+2. Unpack the binary tools archive into this directory, it should contain three sub-directories: bin, script and share

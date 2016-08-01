@@ -66,6 +66,7 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
     * `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount64() < limit));`  
       *change to:*  
       `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));`  
+4. Extract files win32\inet.h, win32\inet.c from PHP sources (5.4.9) to C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\ (overwrite existing files).
 
 # Compile
 1. Open the command prompt and enter the build directory:

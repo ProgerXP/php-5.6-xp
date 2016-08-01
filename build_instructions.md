@@ -51,9 +51,17 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
 <blockquote>cd c:\php-sdk\ </blockquote>
 2. Set up the build environment variables:
 <blockquote>bin\phpsdk_setvars.bat </blockquote>
-3. Change directory to the location of the required version of PHP source code:
+3. Change directory to the location of the required version of PHP source code (x86/x64):
     * <blockquote>cd C:\php-sdk\phpdev\vc11\x86 </blockquote>
     * <blockquote>cd C:\php-sdk\phpdev\vc11\x64 </blockquote>
 4. Set up XP environment variables:
     * <blockquote>xpinitx86.bat </blockquote>
     * <blockquote>xpinitx64.bat </blockquote>
+5. Change directory to the location PHP source code directory:
+<blockquote>cd php-5.6.4-src </blockquote>
+6. Run:
+<blockquote>buildconf</blockquote>
+7. Create configure command:
+<blockquote>configure --disable-all --enable-cli</blockquote>
+8. To build PHP, run:
+<blockquote>nmake</blockquote>

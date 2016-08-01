@@ -35,29 +35,24 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 4. Run the buildtree batch script which will create the desired directory structure:
 <blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>
 5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11
-6. Extract the PHP source code (5.6.24) to:
-    * C:\php-sdk\phpdev\vc11\x86
-    * C:\php-sdk\phpdev\vc11\x64  
+6. Extract the PHP source code (5.6.24) to C:\php-sdk\phpdev\vc11\xXX  
    For example: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src
 7. Extract dependency libraries to build PHP:
-    * deps-5.6-vc11-x86.7z *to* C:\php-sdk\phpdev\vc11\x86\
-    * deps-5.6-vc11-x64.7z *to* C:\php-sdk\phpdev\vc11\x64\
+    * deps-5.6-vc11-xXX.7z *to* C:\php-sdk\phpdev\vc11\xXX\
 8. Create BAT file:
-    * <blockquote>C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat</blockquote>:
+    * *For x86*: <blockquote>C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat</blockquote>:
     `set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%`  
     `set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%`  
     `set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%`  
-    * <blockquote>C:\php-sdk\phpdev\vc11\x64\xpinitx64.bat</blockquote>:  
+    * *For x64*: <blockquote>C:\php-sdk\phpdev\vc11\x64\xpinitx64.bat</blockquote>:  
     `set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%`  
     `set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%`  
     `set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib\x64;%LIB%`  
 
 # Source code adjustments
 
-## Changes for x86 source code:
- 
 1. Set up nmake using v110_xp toolset:
-    * For x86/x64: add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:
+    * Add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:
       <blockquote>`DEFINE("CFLAGS_PHP", "/D_USING_V110_SDK71_ /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \`</blockquote>
     * *For x86*: add "/SUBSYSTEM:CONSOLE,5.01" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
       <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>  

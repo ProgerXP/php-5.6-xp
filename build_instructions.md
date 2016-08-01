@@ -67,45 +67,45 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
       *change to:*  
       `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));`  
 4. Extract files win32\inet.h, win32\inet.c from PHP sources (5.4.9) to C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\ (overwrite existing files).  
-5. Comment lines in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\ext\standard\info.c:
-`/*				case PRODUCT_ENTERPRISE_EVALUATION:
-					sub = "Enterprise Edition (evaluation installation)";
-					break;
-				case PRODUCT_MULTIPOINT_STANDARD_SERVER:
-					sub = "MultiPoint Server Standard Edition (full installation)";
-					break;
-				case PRODUCT_MULTIPOINT_PREMIUM_SERVER:
-					sub = "MultiPoint Server Premium Edition (full installation)";
-					break;
-				case PRODUCT_STANDARD_EVALUATION_SERVER:
-					sub = "Standard Edition (evaluation installation)";
-					break;
-				case PRODUCT_DATACENTER_EVALUATION_SERVER:
-					sub = "Datacenter Edition (evaluation installation)";
-					break;
-				case PRODUCT_ENTERPRISE_N_EVALUATION:
-					sub = "Enterprise N Edition (evaluation installation)";
-					break;
-				case PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER:
-					sub = "Storage Server Workgroup Edition (evaluation installation)";
-					break;
-				case PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER:
-					sub = "Storage Server Standard Edition (evaluation installation)";
-					break;
-				case PRODUCT_CORE_N:
-					sub = "Windows 8 N Edition";
-					break;
-				case PRODUCT_CORE_COUNTRYSPECIFIC:
-					sub = "Windows 8 China Edition";
-					break;
-				case PRODUCT_CORE_SINGLELANGUAGE:
-					sub = "Windows 8 Single Language Edition";
-					break;
-				case PRODUCT_CORE:
-					sub = "Windows 8 Edition";
-					break;
-				case PRODUCT_PROFESSIONAL_WMC:
-					sub = "Professional with Media Center Edition";
+5. Comment lines in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\ext\standard\info.c:  
+`/*				case PRODUCT_ENTERPRISE_EVALUATION:  
+					sub = "Enterprise Edition (evaluation installation)";  
+					break;  
+				case PRODUCT_MULTIPOINT_STANDARD_SERVER:  
+					sub = "MultiPoint Server Standard Edition (full installation)";  
+					break;  
+				case PRODUCT_MULTIPOINT_PREMIUM_SERVER:  
+					sub = "MultiPoint Server Premium Edition (full installation)";  
+					break;  
+				case PRODUCT_STANDARD_EVALUATION_SERVER:  
+					sub = "Standard Edition (evaluation installation)";  
+					break;  
+				case PRODUCT_DATACENTER_EVALUATION_SERVER:  
+					sub = "Datacenter Edition (evaluation installation)";  
+					break;  
+				case PRODUCT_ENTERPRISE_N_EVALUATION:  
+					sub = "Enterprise N Edition (evaluation installation)";  
+					break;  
+				case PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER:  
+					sub = "Storage Server Workgroup Edition (evaluation installation)";  
+					break;  
+				case PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER:  
+					sub = "Storage Server Standard Edition (evaluation installation)";  
+					break;  
+				case PRODUCT_CORE_N:  
+					sub = "Windows 8 N Edition";  
+					break;  
+				case PRODUCT_CORE_COUNTRYSPECIFIC:  
+					sub = "Windows 8 China Edition";  
+					break;  
+				case PRODUCT_CORE_SINGLELANGUAGE:  
+					sub = "Windows 8 Single Language Edition";  
+					break;  
+				case PRODUCT_CORE:  
+					sub = "Windows 8 Edition";  
+					break;  
+				case PRODUCT_PROFESSIONAL_WMC:  
+					sub = "Professional with Media Center Edition";  
 					break;*/`  
 
 # Compile

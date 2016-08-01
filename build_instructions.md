@@ -55,9 +55,9 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
     * Add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:
       <blockquote>`DEFINE("CFLAGS_PHP", "/D_USING_V110_SDK71_ /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \`</blockquote>
     * *For x86*: add "/SUBSYSTEM:CONSOLE,5.01" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
-      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>  
+      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>
     * *For x64*: add "/SUBSYSTEM:CONSOLE,5.02" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\win32\build\config.w32:
-      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.02 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>      
+      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.02 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>
 2. Change target Windows version in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32.h.in:  
     `#define _WIN32_WINNT _WIN32_WINNT_WINXP`  
     `#define NTDDI_VERSION  NTDDI_WINXP`  

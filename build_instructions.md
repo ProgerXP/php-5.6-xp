@@ -53,7 +53,9 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
       <blockquote>`DEFINE("CFLAGS_PHP", "/D_USING_V110_SDK71_ /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \`</blockquote>
     * Add "/SUBSYSTEM:CONSOLE,5.01" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
       <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>
-2. 
+2. Set up target Windows version in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32.h.in:
+    `#define _WIN32_WINNT _WIN32_WINNT_WINXP  
+         #define NTDDI_VERSION  NTDDI_WINXP`
 
 # Compile
 1. Open the command prompt and enter the build directory:

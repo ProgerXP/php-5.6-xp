@@ -121,7 +121,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 <blockquote>bin\phpsdk_setvars.bat </blockquote>
 3. Change directory to the location of the required version of PHP source code:
 <blockquote>cd C:\php-sdk\phpdev\vc11\xXX </blockquote>
-4. Set up XP environment variables:
+4. Set up Windows XP SDK environment variables:
 <blockquote>xpinitxXX.bat </blockquote>
 5. Change directory to the location PHP source code directory:
 <blockquote>cd php-5.6.24-src </blockquote>

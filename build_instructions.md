@@ -26,7 +26,6 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
 
 # Setup the build directory
 
-## Preparation
 1. Create the build directory C:\php-sdk
 2. Unpack the binary tools archive into this directory, it should contain three sub-directories: bin, script and share
 3. Open the command prompt and enter the build directory:
@@ -45,6 +44,16 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
 <blockquote>set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%  
 set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%  
 set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
+
+# Source code adjustments
+
+## Changes for x86 source code:
+1. Set up nmake using v110_xp toolset:
+    * Add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
+      <blockquote>DEFINE("CFLAGS_PHP", "**/D_USING_V110_SDK71_** /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \</blockquote>
+    * Add "/SUBSYSTEM:CONSOLE,5.01" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
+      <blockquote>ADD_FLAG("LDFLAGS", '**/SUBSYSTEM:CONSOLE,5.01** /libpath:"' + php_usual_lib_suspects + '" ');</blockquote>
+2. 
 
 # Compile
 1. Open the command prompt and enter the build directory:

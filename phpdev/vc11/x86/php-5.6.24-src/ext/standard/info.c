@@ -592,7 +592,7 @@ char* php_get_windows_name()
 				case PRODUCT_STARTER_E:
 					sub = "Hyper Core V Edition";
 					break;
-				case PRODUCT_ENTERPRISE_EVALUATION:
+/*				case PRODUCT_ENTERPRISE_EVALUATION:
 					sub = "Enterprise Edition (evaluation installation)";
 					break;
 				case PRODUCT_MULTIPOINT_STANDARD_SERVER:
@@ -630,7 +630,7 @@ char* php_get_windows_name()
 					break;
 				case PRODUCT_PROFESSIONAL_WMC:
 					sub = "Professional with Media Center Edition";
-					break;
+					break;*/
 			}
 		}
 

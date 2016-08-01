@@ -119,12 +119,10 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 <blockquote>cd c:\php-sdk\ </blockquote>
 2. Set up the build environment variables:
 <blockquote>bin\phpsdk_setvars.bat </blockquote>
-3. Change directory to the location of the required version of PHP source code (x86/x64):
-    * <blockquote>cd C:\php-sdk\phpdev\vc11\x86 </blockquote>
-    * <blockquote>cd C:\php-sdk\phpdev\vc11\x64 </blockquote>
+3. Change directory to the location of the required version of PHP source code:
+<blockquote>cd C:\php-sdk\phpdev\vc11\xXX </blockquote>
 4. Set up XP environment variables:
-    * <blockquote>xpinitx86.bat </blockquote>
-    * <blockquote>xpinitx64.bat </blockquote>
+<blockquote>xpinitxXX.bat </blockquote>
 5. Change directory to the location PHP source code directory:
 <blockquote>cd php-5.6.24-src </blockquote>
 6. Run:
@@ -133,6 +131,6 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 <blockquote>configure --disable-all --enable-cli</blockquote>
 8. To build PHP, run:
 <blockquote>nmake</blockquote>
-9. Output binaries are placed:  
+9. Destination folder for binaries is:  
     * *For x86*: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS  
     * *For x64*: C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS  

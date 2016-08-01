@@ -34,12 +34,12 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
 <blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>
 5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11
 6. Extract the PHP source code (5.6.24) to:
-    * <blockquote>C:\php-sdk\phpdev\vc11\x86</blockquote>
-    * <blockquote>C:\php-sdk\phpdev\vc11\x64</blockquote>
+    * C:\php-sdk\phpdev\vc11\x86
+    * C:\php-sdk\phpdev\vc11\x64
    For example: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src
 7. Extract dependency libraries to build PHP:
-    * deps-5.6-vc11-x86.7z to C:\php-sdk\phpdev\vc11\x86\
-    * deps-5.6-vc11-x64.7z to C:\php-sdk\phpdev\vc11\x64\
+    * deps-5.6-vc11-x86.7z *to* C:\php-sdk\phpdev\vc11\x86\
+    * deps-5.6-vc11-x64.7z *to* C:\php-sdk\phpdev\vc11\x64\
 8. Save next lines as C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat
 <blockquote>set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%  
 set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%  

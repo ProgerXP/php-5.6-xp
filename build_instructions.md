@@ -35,8 +35,8 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
 <blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>
 5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11
 6. Extract the PHP source code (5.6.24) to:
-    * C:\php-sdk\phpdev\vc11\x86
-    * C:\php-sdk\phpdev\vc11\x64
+    * <blockquote>C:\php-sdk\phpdev\vc11\x86</blockquote>
+    * <blockquote>C:\php-sdk\phpdev\vc11\x64</blockquote>
    For example: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src
 7. Extract dependency libraries to build PHP:
     * deps-5.6-vc11-x86.7z to C:\php-sdk\phpdev\vc11\x86\
@@ -49,3 +49,11 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
 # Compile
 1. Open the command prompt and enter the build directory:
 <blockquote>cd c:\php-sdk\ </blockquote>
+2. Set up the build environment variables:
+<blockquote>bin\phpsdk_setvars.bat </blockquote>
+3. Change directory to the location of the required version of PHP source code:
+    * <blockquote>cd C:\php-sdk\phpdev\vc11\x86 </blockquote>
+    * <blockquote>cd C:\php-sdk\phpdev\vc11\x64 </blockquote>
+4. Set up XP environment variables:
+    * <blockquote>xpinitx86.bat </blockquote>
+    * <blockquote>xpinitx64.bat </blockquote>

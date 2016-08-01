@@ -40,11 +40,11 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 7. Extract dependency libraries to build PHP:
     * deps-5.6-vc11-xXX.7z *to* C:\php-sdk\phpdev\vc11\xXX\
 8. Create BAT file:
-    * *For x86*: <blockquote>C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat</blockquote>:
+    * *For x86*: <blockquote>C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat</blockquote>
     `set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%`  
     `set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%`  
     `set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%`  
-    * *For x64*: <blockquote>C:\php-sdk\phpdev\vc11\x64\xpinitx64.bat</blockquote>:  
+    * *For x64*: <blockquote>C:\php-sdk\phpdev\vc11\x64\xpinitx64.bat</blockquote>
     `set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%`  
     `set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%`  
     `set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib\x64;%LIB%`  

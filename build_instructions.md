@@ -1,6 +1,8 @@
 Original instructions for building PHP for Windows are here:
 https://wiki.php.net/internals/windows/stepbystepbuild
 
+*In the following paragraphs xXX means x86 or x64 depending on the required PHP version.*  
+
 # Compiler
 
 ## Requirements
@@ -12,7 +14,7 @@ Visual C++ 11.0 (Visual Studio 2012/Visual Studio 2013) for PHP 5.6.
 Install Visual Studio 2012/Visual Studio 2013.
 
 ##Command prompt
-Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
+Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 
 
 # Download prerequisites/sources
@@ -40,23 +42,31 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
 7. Extract dependency libraries to build PHP:
     * deps-5.6-vc11-x86.7z *to* C:\php-sdk\phpdev\vc11\x86\
     * deps-5.6-vc11-x64.7z *to* C:\php-sdk\phpdev\vc11\x64\
-8. Save next lines as C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat
-<blockquote>set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%  
-set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%  
-set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
+8. Create BAT file:
+    * <blockquote>C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat</blockquote>:
+    `set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%`  
+    `set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%`  
+    `set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%`  
+    * <blockquote>C:\php-sdk\phpdev\vc11\x64\xpinitx64.bat</blockquote>:  
+    `set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%`  
+    `set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%`  
+    `set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib\x64;%LIB%`  
 
 # Source code adjustments
 
 ## Changes for x86 source code:
+ 
 1. Set up nmake using v110_xp toolset:
-    * Add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
+    * For x86/x64: add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:
       <blockquote>`DEFINE("CFLAGS_PHP", "/D_USING_V110_SDK71_ /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \`</blockquote>
-    * Add "/SUBSYSTEM:CONSOLE,5.01" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
-      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>
-2. Set up target Windows version in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32.h.in:  
+    * *For x86*: add "/SUBSYSTEM:CONSOLE,5.01" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
+      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>  
+    * *For x64*: add "/SUBSYSTEM:CONSOLE,5.02" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\win32\build\config.w32:
+      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.02 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>      
+2. Change target Windows version in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32.h.in:  
     `#define _WIN32_WINNT _WIN32_WINNT_WINXP`  
     `#define NTDDI_VERSION  NTDDI_WINXP`  
-3. Rollback changes in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\select.c:
+3. Rollback changes in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\select.c:
     * `ULONGLONG ms_total, limit;`  
       *change to:*  
       `DWORD ms_total, limit;`  
@@ -66,8 +76,8 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
     * `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount64() < limit));`  
       *change to:*  
       `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));`  
-4. Extract files win32\inet.h, win32\inet.c from PHP sources (5.4.9) to C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\ (overwrite existing files).  
-5. Comment lines in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\ext\standard\info.c:  
+4. Extract files win32\inet.h, win32\inet.c from PHP sources (5.4.9) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\ (overwrite existing files).  
+5. Comment lines in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\standard\info.c:  
 <blockquote>
 `/*				case PRODUCT_ENTERPRISE_EVALUATION:  
 					sub = "Enterprise Edition (evaluation installation)";  
@@ -121,10 +131,13 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
     * <blockquote>xpinitx86.bat </blockquote>
     * <blockquote>xpinitx64.bat </blockquote>
 5. Change directory to the location PHP source code directory:
-<blockquote>cd php-5.6.4-src </blockquote>
+<blockquote>cd php-5.6.24-src </blockquote>
 6. Run:
 <blockquote>buildconf</blockquote>
 7. Create configure command:
 <blockquote>configure --disable-all --enable-cli</blockquote>
 8. To build PHP, run:
 <blockquote>nmake</blockquote>
+9. Output binaries are placed:  
+    * *For x86*: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS  
+    * *For x64*: C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS  

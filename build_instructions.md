@@ -42,10 +42,10 @@ Open the “VS2012/VS2013 x86 Native Tools Command Prompt”
     * deps-5.6-vc11-x86.7z to C:\php-sdk\phpdev\vc11\x86\
     * deps-5.6-vc11-x64.7z to C:\php-sdk\phpdev\vc11\x64\
 8. Save next lines as C:\php-sdk\phpdev\vc11\x86\xpinitx86.bat
-<blockquote>set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%
-set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%
+<blockquote>set INCLUDE=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Include;%INCLUDE%  
+set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%  
 set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
-    
+
 # Compile
 1. Open the command prompt and enter the build directory:
 <blockquote>cd c:\php-sdk\ </blockquote>

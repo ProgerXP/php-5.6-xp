@@ -57,10 +57,15 @@ set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib;%LIB%</blockquote>
     `#define _WIN32_WINNT _WIN32_WINNT_WINXP`  
     `#define NTDDI_VERSION  NTDDI_WINXP`  
 3. Rollback changes in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\select.c:
-    * `ULONGLONG ms_total, limit;` *change to:* `DWORD ms_total, limit;`  
-    * `limit = GetTickCount64() + ms_total;` *change to:* `limit = GetTickCount() + ms_total;`  
+    * `ULONGLONG ms_total, limit;`  
+      *change to:*  
+      `DWORD ms_total, limit;`  
+    * `limit = GetTickCount64() + ms_total;`  
+      *change to:*  
+      `limit = GetTickCount() + ms_total;`  
     * `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount64() < limit));`  
-      *change to:* `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));`  
+      *change to:*  
+      `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));`  
 
 # Compile
 1. Open the command prompt and enter the build directory:

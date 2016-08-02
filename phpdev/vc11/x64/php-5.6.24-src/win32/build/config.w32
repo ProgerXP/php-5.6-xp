@@ -131,7 +131,7 @@ DEFINE('PHP_PREFIX', PHP_PREFIX);
 DEFINE("BASE_INCLUDES", "/I . /I main /I Zend /I TSRM /I ext ");
 
 // CFLAGS for building the PHP dll
-DEFINE("CFLAGS_PHP", "/D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \
+DEFINE("CFLAGS_PHP", "/D_USING_V110_SDK71_ /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \
 /D LIBZEND_EXPORTS /D TSRM_EXPORTS /D SAPI_EXPORTS /D WINVER=0x500");
 
 DEFINE('CFLAGS_PHP_OBJ', '$(CFLAGS_PHP) $(STATIC_EXT_CFLAGS)');
@@ -300,7 +300,7 @@ var php_usual_include_suspects = PHP_PHP_BUILD+"\\include";
 var php_usual_lib_suspects = PHP_PHP_BUILD+"\\lib";
 
 ADD_FLAG("CFLAGS", '/I "' + php_usual_include_suspects + '" ');
-ADD_FLAG("LDFLAGS", '/libpath:"' + php_usual_lib_suspects + '" ');
+ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.02 /libpath:"' + php_usual_lib_suspects + '" ');
 
 // Poke around for some headers
 function probe_basic_headers()

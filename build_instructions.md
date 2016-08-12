@@ -116,7 +116,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 					
 #Build extensions
 
-1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/raw/master/build_curl.md)
+1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)
 
 # Compile
 1. Open the command prompt and enter the build directory:

@@ -1,5 +1,7 @@
 Original instructions for building PHP for Windows are here:
-https://wiki.php.net/internals/windows/stepbystepbuild
+https://wiki.php.net/internals/windows/stepbystepbuild  
+  
+# Build PHP for Windows XP
 
 *In the following paragraphs xXX means x86 or x64 depending on the required PHP version.*  
 

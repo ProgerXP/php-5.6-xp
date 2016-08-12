@@ -122,7 +122,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
     * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-x86-release-static-ipv6-sspi-winssl\bin\curl.exe  
            *to*  
            C:\php-sdk\phpdev\vc11\x86\deps\bin  
-    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-x86-release-static-ipv6-sspi-winssl\include\*  
+    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-x86-release-static-ipv6-sspi-winssl\include\\*  
           *to*  
            C:\php-sdk\phpdev\vc11\x86\deps\include  
     * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-x86-release-static-ipv6-sspi-winssl\lib\libcurl_a.lib  

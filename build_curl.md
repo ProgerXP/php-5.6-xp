@@ -21,7 +21,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 * Unpack the CURL sources archive into directory c:\php-sdk\extensions\
 
 # Source code adjustments
-Set up nmake using v110_xp toolset in file C:\php-sdk\phpdev\extensions\curl-7.50.1\winbuild\MakefileBuild.vc:
+Set up nmake using v110_xp toolset in file C:\php-sdk\phpdev\extensions\curl-7.50.1\winbuild\MakefileBuild.vc:  
     * *For x86*:
       <blockquote>CC_NODEBUG  = cl.exe /O2 /DNDEBUG /D_USING_V110_SDK71_</blockquote>
       <blockquote>CFLAGS     = /I. /I../lib /I../include /nologo /W3 /GX /DWIN32 /YX /FD /c /DBUILDING_LIBCURL /D_USING_V110_SDK71_</blockquote>

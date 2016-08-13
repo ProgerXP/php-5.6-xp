@@ -119,15 +119,15 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 #Build extensions
 
 1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)  
-    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-x86-release-static-ipv6-sspi-winssl\bin\curl.exe  
+    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl\bin\curl.exe  
            *to*  
-           C:\php-sdk\phpdev\vc11\x86\deps\bin  
-    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-x86-release-static-ipv6-sspi-winssl\include\\*  
+           C:\php-sdk\phpdev\vc11\xXX\deps\bin  
+    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl\include\\*  
           *to*  
-           C:\php-sdk\phpdev\vc11\x86\deps\include  
-    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-x86-release-static-ipv6-sspi-winssl\lib\libcurl_a.lib  
+           C:\php-sdk\phpdev\vc11\xXX\deps\include  
+    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl\lib\libcurl_a.lib  
           *to*  
-          C:\php-sdk\phpdev\vc11\x86\deps\lib
+          C:\php-sdk\phpdev\vc11\xXX\deps\lib
 
 # Compile
 1. Open the command prompt and enter the build directory:

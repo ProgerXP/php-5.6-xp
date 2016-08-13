@@ -88,7 +88,12 @@ PDB_NAME_DLL_DEBUG     = $(BASE_NAME_DEBUG).pdb
 # CURL Command section
 PROGRAM_NAME = curl.exe
 CURL_CFLAGS   =  /I../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c /D_USING_V110_SDK71_
+
+!IF "$(MACHINE)"=="x64"
+CURL_LFLAGS   = /nologo /out:$(DIRDIST)\bin\$(PROGRAM_NAME) /SUBSYSTEM:CONSOLE,5.02 /machine:$(MACHINE)
+!ELSE
 CURL_LFLAGS   = /nologo /out:$(DIRDIST)\bin\$(PROGRAM_NAME) /SUBSYSTEM:CONSOLE,5.01 /machine:$(MACHINE)
+!ENDIF
 CURL_RESFLAGS = /i../include
 
 #############################################################

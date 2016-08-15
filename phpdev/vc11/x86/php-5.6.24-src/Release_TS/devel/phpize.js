@@ -7,6 +7,7 @@ var PHP_RELEASE_VERSION=24
 
 /* Genereted extensions list with mode (static/shared) */
 PHP_CALENDAR_SHARED=false;
+PHP_CTYPE_SHARED=false;
 PHP_CURL_SHARED=true;
 PHP_DATE_SHARED=false;
 PHP_EREG_SHARED=false;

@@ -6,6 +6,7 @@ var PHP_MINOR_VERSION=6
 var PHP_RELEASE_VERSION=24
 
 /* Genereted extensions list with mode (static/shared) */
+PHP_CALENDAR_SHARED=false;
 PHP_CURL_SHARED=true;
 PHP_DATE_SHARED=false;
 PHP_EREG_SHARED=false;

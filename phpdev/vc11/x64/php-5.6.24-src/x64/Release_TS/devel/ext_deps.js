@@ -1,3 +1,5 @@
+PHP_CALENDAR=true;
+PHP_CALENDAR_SHARED=false;
 PHP_CURL=true;
 PHP_CURL_SHARED=true;
 PHP_DATE=true;

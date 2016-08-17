@@ -1,4 +1,10 @@
 EXPORTS
+_libiconv_version
+libiconv_close
+libiconv
+libiconv_open
+libiconv_set_relocation_prefix
+EXPORTS
 php_pcre_compile
 php_pcre_copy_substring
 php_pcre_exec

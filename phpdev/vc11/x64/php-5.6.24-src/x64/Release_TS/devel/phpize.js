@@ -19,11 +19,12 @@ PHP_ICONV_SHARED=false;
 PHP_JSON_SHARED=false;
 PHP_MBSTRING_SHARED=false;
 PHP_MCRYPT_SHARED=false;
+PHP_OPENSSL_SHARED=false;
 PHP_PCRE_SHARED=false;
 PHP_REFLECTION_SHARED=false;
 PHP_SPL_SHARED=false;
 PHP_STANDARD_SHARED=false;
-PHP_MYSQLI_SHARED=false;
+PHP_PDO_SHARED=false;
 
 
 /* Genereted win32/build/phpize.js.in */

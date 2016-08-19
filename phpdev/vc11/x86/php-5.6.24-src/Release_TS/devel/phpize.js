@@ -22,10 +22,10 @@ PHP_MCRYPT_SHARED=false;
 PHP_OPENSSL_SHARED=false;
 PHP_PCRE_SHARED=false;
 PHP_REFLECTION_SHARED=false;
+PHP_SESSION_SHARED=false;
 PHP_SPL_SHARED=false;
 PHP_STANDARD_SHARED=false;
 PHP_PDO_SHARED=false;
-PHP_PDO_MYSQL_SHARED=false;
 
 
 /* Genereted win32/build/phpize.js.in */

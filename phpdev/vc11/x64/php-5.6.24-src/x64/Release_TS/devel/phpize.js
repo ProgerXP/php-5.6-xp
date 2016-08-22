@@ -6,6 +6,7 @@ var PHP_MINOR_VERSION=6
 var PHP_RELEASE_VERSION=24
 
 /* Genereted extensions list with mode (static/shared) */
+PHP_BZ2_SHARED=false;
 PHP_CALENDAR_SHARED=false;
 PHP_CTYPE_SHARED=false;
 PHP_CURL_SHARED=true;
@@ -29,6 +30,7 @@ PHP_STANDARD_SHARED=false;
 PHP_ZLIB_SHARED=false;
 PHP_MYSQLI_SHARED=false;
 PHP_PDO_SHARED=false;
+PHP_PDO_MYSQL_SHARED=false;
 
 
 /* Genereted win32/build/phpize.js.in */

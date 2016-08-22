@@ -1,3 +1,5 @@
+PHP_BZ2=true;
+PHP_BZ2_SHARED=false;
 PHP_CALENDAR=true;
 PHP_CALENDAR_SHARED=false;
 PHP_CTYPE=true;
@@ -44,3 +46,5 @@ PHP_MYSQLI=true;
 PHP_MYSQLI_SHARED=false;
 PHP_PDO=true;
 PHP_PDO_SHARED=false;
+PHP_PDO_MYSQL=true;
+PHP_PDO_MYSQL_SHARED=false;

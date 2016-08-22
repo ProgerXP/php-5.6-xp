@@ -36,5 +36,7 @@ PHP_SPL=true;
 PHP_SPL_SHARED=false;
 PHP_STANDARD=true;
 PHP_STANDARD_SHARED=false;
+PHP_ZLIB=true;
+PHP_ZLIB_SHARED=false;
 PHP_PDO=true;
 PHP_PDO_SHARED=false;

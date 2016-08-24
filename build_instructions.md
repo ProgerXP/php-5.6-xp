@@ -143,7 +143,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 6. Run:
 <blockquote>buildconf</blockquote>
 7. Create configure command:
-<blockquote>configure --disable-all --enable-cli --with-curl --enable-calendar --enable-ctype --enable-fileinfo --enable-filter --with-gd --enable-hash --with-iconv --enable-json --enable-mbstring --with-mcrypt --with-mysqli --with-mysqlnd --with-openssl --enable-pdo --with-pdo-mysql --enable-session --enable-zlib --with-bz2 --with-libxml --with-dom --enable-exif --with-gettext --with-gmp --enable-apache2-4handler</blockquote>
+<blockquote>configure --disable-all --enable-cli --with-curl --enable-calendar --enable-ctype --enable-fileinfo --enable-filter --with-gd --enable-hash --with-iconv --enable-json --enable-mbstring --with-mcrypt --with-mysqli --with-mysqlnd --with-openssl --enable-pdo --with-pdo-mysql --enable-session --enable-zlib --with-bz2 --with-libxml --with-dom --enable-exif --with-gettext --with-gmp --with-mysql --with-pdo-pgsql --with-pgsql --enable-apache2-4handler</blockquote>
 8. To build PHP, run:
 <blockquote>nmake</blockquote>
 9. Destination folder for binaries is:  

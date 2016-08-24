@@ -39,6 +39,8 @@ PHP_MYSQLI_SHARED=false;
 PHP_PDO_SHARED=false;
 PHP_PDO_MYSQL_SHARED=false;
 PHP_PDO_PGSQL_SHARED=false;
+PHP_PDO_SQLITE_SHARED=false;
+PHP_PHAR_SHARED=false;
 
 
 /* Genereted win32/build/phpize.js.in */

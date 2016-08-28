@@ -116,6 +116,115 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 					sub = "Professional with Media Center Edition";  
 					break;*/`</blockquote>
 					
+6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:
+<blockquote>
+`#if(_WIN32_WINNT < 0x0600)  
+#define CMSG_SPACE WSA_CMSG_SPACE  
+#define CMSG_LEN WSA_CMSG_LEN  
+#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
+#define CMSG_NXTHDR WSA_CMSG_NXTHDR  
+  
+WINAPI if_nametoindex (__in PCSTR iface);  
+  
+int WSASendMsg(  
+    __in SOCKET Handle,  
+    __in LPWSAMSG lpMsg,  
+    __in DWORD dwFlags,  
+    __out_opt LPDWORD lpNumberOfBytesSent,  
+    __inout_opt LPWSAOVERLAPPED lpOverlapped,  
+    __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
+    );  
+#endif  
+<blockquote>
+
+7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:
+<blockquote>
+`#if(_WIN32_WINNT < 0x0600)  
+WINAPI if_nametoindex (__in PCSTR iface)  
+{  
+	PIP_ADAPTER_ADDRESSES addresses = NULL, p;  
+	ulong addresses_len = 0;  
+	uint idx = 0;  
+	DWORD res;  
+  
+	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, NULL, &addresses_len);  
+	if (res != NO_ERROR && res != ERROR_BUFFER_OVERFLOW)  
+	{  
+		return 0;  
+	}  
+
+	addresses = malloc (addresses_len);  
+	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, addresses, &addresses_len);  
+  
+	if (res != NO_ERROR)  
+	{  
+		free (addresses);  
+		return 0;  
+	}  
+  
+	p = addresses;  
+	while (p)  
+	{  
+		if (strcmp (p->AdapterName, iface) == 0)  
+		{  
+			idx = p->IfIndex;  
+			break;  
+		}  
+		p = p->Next;  
+	}  
+  
+	free (addresses);  
+  
+	return idx;  
+}  
+  
+int WSASendMsg(  
+	__in SOCKET Handle,  
+	__in LPWSAMSG lpMsg,  
+	__in DWORD dwFlags,  
+	__out_opt LPDWORD lpNumberOfBytesSent,  
+	__inout_opt LPWSAOVERLAPPED lpOverlapped,  
+	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
+	)  
+{  
+	if (lpMsg == NULL)  
+	{  
+		return 0;  
+	}  
+	if (lpOverlapped != NULL)  
+	{  
+		return 0;  
+	}  
+	if (lpCompletionRoutine != NULL)  
+	{  
+		return 0;  
+	}  
+	char tmpbuf[65536];  
+	uint32_t tmplen = 0;  
+	for (DWORD i = 0; i < lpMsg->dwBufferCount; i++)  
+	{  
+		WSABUF wsaBuf = lpMsg->lpBuffers[i];  
+		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))  
+		{  
+			return 0;  
+		}  
+		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);  
+		tmplen += wsaBuf.len;  
+	}  
+	int res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  
+	if (res == SOCKET_ERROR)  
+	{  
+		return res;  
+	}  
+	if (lpNumberOfBytesSent != NULL)  
+	{  
+		*lpNumberOfBytesSent = res;  
+	}  
+	return 0;  
+}  
+#endif  
+<blockquote>
+					
 #Build extensions
 
 1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)  
@@ -143,7 +252,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 6. Run:
 <blockquote>buildconf</blockquote>
 7. Create configure command:
-<blockquote>configure --disable-all --enable-cli --with-curl --enable-calendar --enable-ctype --enable-fileinfo --enable-filter --with-gd --enable-hash --with-iconv --enable-json --enable-mbstring --with-mcrypt --with-mysqli --with-mysqlnd --with-openssl --enable-pdo --with-pdo-mysql --enable-session --enable-zlib --with-bz2 --with-libxml --with-dom --enable-exif --with-gettext --with-gmp --with-mysql --with-pdo-pgsql --with-pgsql --with-pdo-sqlite --enable-phar --enable-apache2-4handler</blockquote>
+<blockquote>configure --disable-all --enable-cli --with-curl --enable-calendar --enable-ctype --enable-fileinfo --enable-filter --with-gd --enable-hash --with-iconv --enable-json --enable-mbstring --with-mcrypt --with-mysqli --with-mysqlnd --with-openssl --enable-pdo --with-pdo-mysql --enable-session --enable-zlib --with-bz2 --with-libxml --with-dom --enable-exif --with-gettext --with-gmp --with-mysql --with-pdo-pgsql --with-pgsql --with-pdo-sqlite --enable-phar --with-simplexml --enable-sockets --enable-apache2-4handler</blockquote>
 8. To build PHP, run:
 <blockquote>nmake</blockquote>
 9. Destination folder for binaries is:  

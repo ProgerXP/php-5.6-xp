@@ -122,3 +122,20 @@ php_socket *socket_import_file_descriptor(PHP_SOCKET sock TSRMLS_DC);
  * End:
  */
 
+#if(_WIN32_WINNT < 0x0600)
+#define CMSG_SPACE WSA_CMSG_SPACE
+#define CMSG_LEN WSA_CMSG_LEN
+#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR
+#define CMSG_NXTHDR WSA_CMSG_NXTHDR
+
+WINAPI if_nametoindex (__in PCSTR iface);
+
+int WSASendMsg(
+    __in SOCKET Handle,
+    __in LPWSAMSG lpMsg,
+    __in DWORD dwFlags,
+    __out_opt LPDWORD lpNumberOfBytesSent,
+    __inout_opt LPWSAOVERLAPPED lpOverlapped,
+    __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+    );
+#endif

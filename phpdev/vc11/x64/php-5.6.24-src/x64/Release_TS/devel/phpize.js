@@ -46,6 +46,9 @@ PHP_PDO_SQLITE_SHARED=false;
 PHP_PHAR_SHARED=false;
 PHP_SIMPLEXML_SHARED=false;
 PHP_XML_SHARED=false;
+PHP_XMLREADER_SHARED=false;
+PHP_XMLRPC_SHARED=false;
+PHP_XMLWRITER_SHARED=false;
 
 
 /* Genereted win32/build/phpize.js.in */

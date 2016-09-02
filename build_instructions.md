@@ -129,7 +129,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 \#define CMSG_SPACE WSA_CMSG_SPACE  
 \#define CMSG_LEN WSA_CMSG_LEN  
 \#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
-\#define CMSG_NXTHDR WSA_CMSG_NXTHDR  
+\#define CMSG_NXTHDR WSA_CMSG_NXTHDR
   
 WINAPI if_nametoindex (__in PCSTR iface);  
   

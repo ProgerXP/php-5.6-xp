@@ -123,7 +123,8 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 					sub = "Professional with Media Center Edition";  
 					break;*/`</blockquote>
 					
-6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:
+6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:  
+<blockquote>
 `#if(_WIN32_WINNT < 0x0600)  
 #define CMSG_SPACE WSA_CMSG_SPACE  
 #define CMSG_LEN WSA_CMSG_LEN  
@@ -140,7 +141,7 @@ int WSASendMsg(
     __inout_opt LPWSAOVERLAPPED lpOverlapped,  
     __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
     );  
-#endif`
+#endif`</blockquote>
 
 7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:
 <blockquote>
@@ -228,7 +229,7 @@ int WSASendMsg(
 	return 0;  
 }  
 #endif  
-<blockquote>
+`</blockquote>
 					
 #Build extensions
 

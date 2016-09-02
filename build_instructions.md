@@ -130,9 +130,7 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 \#define CMSG_LEN WSA_CMSG_LEN  
 \#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
 \#define CMSG_NXTHDR WSA_CMSG_NXTHDR  
-test  
 WINAPI if_nametoindex (__in PCSTR iface);  
-  
 int WSASendMsg(  
     __in SOCKET Handle,  
     __in LPWSAMSG lpMsg,  
@@ -141,7 +139,7 @@ int WSASendMsg(
     __inout_opt LPWSAOVERLAPPED lpOverlapped,  
     __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
     );  
-\#endif`</blockquote>
+\#endif</blockquote>
 
 7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:
 <blockquote>

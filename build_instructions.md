@@ -11,6 +11,13 @@ https://wiki.php.net/internals/windows/stepbystepbuild
 
 Visual C++ 11.0 (Visual Studio 2012/Visual Studio 2013) for PHP 5.6.
 
+Launching PHP in Windows XP requires corresponding runtime components installed.
+*For x86*: [vcredist_x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredit_x86.exe)
+*For x64*: [vcredist_x64](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredit_x64.exe)
+  
+Note: Required Visual C++ Redistributable for Visual Studio 2012 Update 4 was download from here:
+https://www.microsoft.com/en-us/download/details.aspx?id=30679
+
 
 ## Setup
 Install Visual Studio 2012/Visual Studio 2013.
@@ -119,10 +126,10 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:
 <blockquote>
 `#if(_WIN32_WINNT < 0x0600)  
-#define CMSG_SPACE WSA_CMSG_SPACE  
-#define CMSG_LEN WSA_CMSG_LEN  
-#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
-#define CMSG_NXTHDR WSA_CMSG_NXTHDR  
+##define CMSG_SPACE WSA_CMSG_SPACE  
+##define CMSG_LEN WSA_CMSG_LEN  
+##define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
+##define CMSG_NXTHDR WSA_CMSG_NXTHDR  
   
 WINAPI if_nametoindex (__in PCSTR iface);  
   
@@ -134,7 +141,7 @@ int WSASendMsg(
     __inout_opt LPWSAOVERLAPPED lpOverlapped,  
     __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
     );  
-#endif  
+##endif  
 <blockquote>
 
 7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:

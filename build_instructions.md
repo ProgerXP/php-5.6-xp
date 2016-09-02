@@ -12,8 +12,8 @@ https://wiki.php.net/internals/windows/stepbystepbuild
 Visual C++ 11.0 (Visual Studio 2012/Visual Studio 2013) for PHP 5.6.
 
 Launching PHP in Windows XP requires corresponding runtime components installed.  
-*For x86*: [vcredist_x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredit_x86.exe)  
-*For x64*: [vcredist_x64](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredit_x64.exe)  
+*For x86*: [vcredist_x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredist_x86.exe)  
+*For x64*: [vcredist_x64](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredist_x64.exe)  
   
 Note: required Visual C++ Redistributables for Visual Studio 2012 Update 4 were downloaded from here:
 https://www.microsoft.com/en-us/download/details.aspx?id=30679

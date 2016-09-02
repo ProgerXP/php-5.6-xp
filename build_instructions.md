@@ -125,11 +125,11 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 					
 6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:
 <blockquote>
-`#if(_WIN32_WINNT < 0x0600)  
-##define CMSG_SPACE WSA_CMSG_SPACE  
-##define CMSG_LEN WSA_CMSG_LEN  
-##define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
-##define CMSG_NXTHDR WSA_CMSG_NXTHDR  
+#if(_WIN32_WINNT < 0x0600)  
+#define CMSG_SPACE WSA_CMSG_SPACE  
+#define CMSG_LEN WSA_CMSG_LEN  
+#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
+#define CMSG_NXTHDR WSA_CMSG_NXTHDR  
   
 WINAPI if_nametoindex (__in PCSTR iface);  
   
@@ -141,12 +141,12 @@ int WSASendMsg(
     __inout_opt LPWSAOVERLAPPED lpOverlapped,  
     __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
     );  
-##endif  
+#endif  
 <blockquote>
 
 7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:
 <blockquote>
-`#if(_WIN32_WINNT < 0x0600)  
+#if(_WIN32_WINNT < 0x0600)  
 WINAPI if_nametoindex (__in PCSTR iface)  
 {  
 	PIP_ADAPTER_ADDRESSES addresses = NULL, p;  

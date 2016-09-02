@@ -125,11 +125,11 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 					
 6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:  
 <blockquote>
-\#if (_WIN32_WINNT < 0x0600)<br />
-\#define CMSG_SPACE WSA_CMSG_SPACE<br />
-\#define CMSG_LEN WSA_CMSG_LEN<br />
-\#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR<br />
-\#define CMSG_NXTHDR WSA_CMSG_NXTHDR<br />
+#if (_WIN32_WINNT < 0x0600)<br />
+#define CMSG_SPACE WSA_CMSG_SPACE<br />
+#define CMSG_LEN WSA_CMSG_LEN<br />
+#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR<br />
+#define CMSG_NXTHDR WSA_CMSG_NXTHDR<br />
 <br />
 WINAPI if_nametoindex (__in PCSTR iface);<br />
 <br />
@@ -145,90 +145,90 @@ int WSASendMsg(  <br />
 
 7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:
 <blockquote>
-\#if (_WIN32_WINNT < 0x0600)  
-WINAPI if_nametoindex (__in PCSTR iface)  
-{  
-	PIP_ADAPTER_ADDRESSES addresses = NULL, p;  
-	ulong addresses_len = 0;  
-	uint idx = 0;  
-	DWORD res;  
-  
-	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, NULL, &addresses_len);  
-	if (res != NO_ERROR && res != ERROR_BUFFER_OVERFLOW)  
-	{  
-		return 0;  
-	}  
-
-	addresses = malloc (addresses_len);  
-	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, addresses, &addresses_len);  
-  
-	if (res != NO_ERROR)  
-	{  
-		free (addresses);  
-		return 0;  
-	}  
-  
-	p = addresses;  
-	while (p)  
-	{  
-		if (strcmp (p->AdapterName, iface) == 0)  
-		{  
-			idx = p->IfIndex;  
-			break;  
-		}  
-		p = p->Next;  
-	}  
-  
-	free (addresses);  
-  
-	return idx;  
-}  
-  
-int WSASendMsg(  
-	__in SOCKET Handle,  
-	__in LPWSAMSG lpMsg,  
-	__in DWORD dwFlags,  
-	__out_opt LPDWORD lpNumberOfBytesSent,  
-	__inout_opt LPWSAOVERLAPPED lpOverlapped,  
-	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
-	)  
-{  
-	if (lpMsg == NULL)  
-	{  
-		return 0;  
-	}  
-	if (lpOverlapped != NULL)  
-	{  
-		return 0;  
-	}  
-	if (lpCompletionRoutine != NULL)  
-	{  
-		return 0;  
-	}  
-	char tmpbuf[65536];  
-	uint32_t tmplen = 0;  
-	for (DWORD i = 0; i < lpMsg->dwBufferCount; i++)  
-	{  
-		WSABUF wsaBuf = lpMsg->lpBuffers[i];  
-		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))  
-		{  
-			return 0;  
-		}  
-		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);  
-		tmplen += wsaBuf.len;  
-	}  
-	int res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  
-	if (res == SOCKET_ERROR)  
-	{  
-		return res;  
-	}  
-	if (lpNumberOfBytesSent != NULL)  
-	{  
-		*lpNumberOfBytesSent = res;  
-	}  
-	return 0;  
-}  
-\#endif</blockquote>
+#if (_WIN32_WINNT < 0x0600)  <br />
+WINAPI if_nametoindex (__in PCSTR iface)  <br />
+{  <br />
+	PIP_ADAPTER_ADDRESSES addresses = NULL, p;  <br />
+	ulong addresses_len = 0;  <br />
+	uint idx = 0;  <br />
+	DWORD res;  <br />
+  <br />
+	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, NULL, &addresses_len);  <br />
+	if (res != NO_ERROR && res != ERROR_BUFFER_OVERFLOW)  <br />
+	{  <br />
+		return 0;  <br />
+	}  <br />
+<br />
+	addresses = malloc (addresses_len);  <br />
+	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, addresses, &addresses_len);  <br />
+  <br />
+	if (res != NO_ERROR)  <br />
+	{  <br />
+		free (addresses);  <br />
+		return 0;  <br />
+	}  <br />
+  <br />
+	p = addresses;  <br />
+	while (p)  <br />
+	{  <br />
+		if (strcmp (p->AdapterName, iface) == 0)  <br />
+		{  <br />
+			idx = p->IfIndex;  <br />
+			break;  <br />
+		}  <br />
+		p = p->Next;  <br />
+	}  <br />
+  <br />
+	free (addresses);  <br />
+  <br />
+	return idx;  <br />
+}  <br />
+<br />
+int WSASendMsg(  <br />
+	__in SOCKET Handle,  <br />
+	__in LPWSAMSG lpMsg,  <br />
+	__in DWORD dwFlags,  <br />
+	__out_opt LPDWORD lpNumberOfBytesSent,  <br />
+	__inout_opt LPWSAOVERLAPPED lpOverlapped,  <br />
+	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  <br />
+	)  <br />
+{  <br />
+	if (lpMsg == NULL)  <br />
+	{  <br />
+		return 0;  <br />
+	}  <br />
+	if (lpOverlapped != NULL)  <br />
+	{  <br />
+		return 0;  <br />
+	}  <br />
+	if (lpCompletionRoutine != NULL)  <br />
+	{  <br />
+		return 0;  <br />
+	}  <br />
+	char tmpbuf[65536];  <br />
+	uint32_t tmplen = 0;  <br />
+	for (DWORD i = 0; i < lpMsg->dwBufferCount; i++)  <br />
+	{  <br />
+		WSABUF wsaBuf = lpMsg->lpBuffers[i];  <br />
+		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))  <br />
+		{  <br />
+			return 0;  <br />
+		}  <br />
+		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);  <br />
+		tmplen += wsaBuf.len;  <br />
+	}  <br />
+	int res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  <br />
+	if (res == SOCKET_ERROR)  <br />
+	{  <br />
+		return res;  <br />
+	}  <br />
+	if (lpNumberOfBytesSent != NULL)  <br />
+	{  <br />
+		*lpNumberOfBytesSent = res;  <br />
+	}  <br />
+	return 0;  <br />
+}  <br />
+#endif</blockquote>
 					
 #Build extensions
 

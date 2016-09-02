@@ -83,63 +83,63 @@ Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
 4. Extract files win32\inet.h, win32\inet.c from PHP sources (5.4.9) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\ (overwrite existing files).  
 5. Comment lines in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\standard\info.c:  
 <blockquote>
-`/*				case PRODUCT_ENTERPRISE_EVALUATION:  
-					sub = "Enterprise Edition (evaluation installation)";  
-					break;  
-				case PRODUCT_MULTIPOINT_STANDARD_SERVER:  
-					sub = "MultiPoint Server Standard Edition (full installation)";  
-					break;  
-				case PRODUCT_MULTIPOINT_PREMIUM_SERVER:  
-					sub = "MultiPoint Server Premium Edition (full installation)";  
-					break;  
-				case PRODUCT_STANDARD_EVALUATION_SERVER:  
-					sub = "Standard Edition (evaluation installation)";  
-					break;  
-				case PRODUCT_DATACENTER_EVALUATION_SERVER:  
-					sub = "Datacenter Edition (evaluation installation)";  
-					break;  
-				case PRODUCT_ENTERPRISE_N_EVALUATION:  
-					sub = "Enterprise N Edition (evaluation installation)";  
-					break;  
-				case PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER:  
-					sub = "Storage Server Workgroup Edition (evaluation installation)";  
-					break;  
-				case PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER:  
-					sub = "Storage Server Standard Edition (evaluation installation)";  
-					break;  
-				case PRODUCT_CORE_N:  
-					sub = "Windows 8 N Edition";  
-					break;  
-				case PRODUCT_CORE_COUNTRYSPECIFIC:  
-					sub = "Windows 8 China Edition";  
-					break;  
-				case PRODUCT_CORE_SINGLELANGUAGE:  
-					sub = "Windows 8 Single Language Edition";  
-					break;  
-				case PRODUCT_CORE:  
-					sub = "Windows 8 Edition";  
-					break;  
-				case PRODUCT_PROFESSIONAL_WMC:  
-					sub = "Professional with Media Center Edition";  
-					break;*/`</blockquote>
+/*				case PRODUCT_ENTERPRISE_EVALUATION:  <br />
+					sub = "Enterprise Edition (evaluation installation)";  <br />
+					break;  <br />
+				case PRODUCT_MULTIPOINT_STANDARD_SERVER:  <br />
+					sub = "MultiPoint Server Standard Edition (full installation)";  <br />
+					break;  <br />
+				case PRODUCT_MULTIPOINT_PREMIUM_SERVER:  <br />
+					sub = "MultiPoint Server Premium Edition (full installation)";  <br />
+					break;  <br />
+				case PRODUCT_STANDARD_EVALUATION_SERVER:  <br />
+					sub = "Standard Edition (evaluation installation)";  <br />
+					break;  <br />
+				case PRODUCT_DATACENTER_EVALUATION_SERVER:  <br />
+					sub = "Datacenter Edition (evaluation installation)";  <br />
+					break;  <br />
+				case PRODUCT_ENTERPRISE_N_EVALUATION:  <br />
+					sub = "Enterprise N Edition (evaluation installation)";  <br />
+					break;  <br />
+				case PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER:  <br />
+					sub = "Storage Server Workgroup Edition (evaluation installation)";  <br />
+					break;  <br />
+				case PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER:  <br />
+					sub = "Storage Server Standard Edition (evaluation installation)";  <br />
+					break;  <br />
+				case PRODUCT_CORE_N:  <br />
+					sub = "Windows 8 N Edition";  <br />
+					break;  <br />
+				case PRODUCT_CORE_COUNTRYSPECIFIC:  <br />
+					sub = "Windows 8 China Edition";  <br />
+					break;  <br />
+				case PRODUCT_CORE_SINGLELANGUAGE:  <br />
+					sub = "Windows 8 Single Language Edition";  <br />
+					break;  <br />
+				case PRODUCT_CORE:  <br />
+					sub = "Windows 8 Edition";  <br />
+					break;  <br />
+				case PRODUCT_PROFESSIONAL_WMC:  <br />
+					sub = "Professional with Media Center Edition";  <br />
+					break;*/</blockquote>
 					
 6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:  
 <blockquote>
-\#if (_WIN32_WINNT < 0x0600)  
-\#define CMSG_SPACE WSA_CMSG_SPACE  
-\#define CMSG_LEN WSA_CMSG_LEN  
-\#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR  
+\#if (_WIN32_WINNT < 0x0600)<br />
+\#define CMSG_SPACE WSA_CMSG_SPACE<br />
+\#define CMSG_LEN WSA_CMSG_LEN<br />
+\#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR<br />
 \#define CMSG_NXTHDR WSA_CMSG_NXTHDR<br />
 <br />
 WINAPI if_nametoindex (__in PCSTR iface);<br />
 <br />
 int WSASendMsg(  <br />
-        __in SOCKET Handle,  
-        __in LPWSAMSG lpMsg,  
-        __in DWORD dwFlags,  
-        __out_opt LPDWORD lpNumberOfBytesSent,  
-        __inout_opt LPWSAOVERLAPPED lpOverlapped,  
-        __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  
+        __in SOCKET Handle,<br />
+        __in LPWSAMSG lpMsg,<br />
+        __in DWORD dwFlags,<br />
+        __out_opt LPDWORD lpNumberOfBytesSent,<br />
+        __inout_opt LPWSAOVERLAPPED lpOverlapped,<br />
+        __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine<br />
     );  
 \#endif //_WIN32_WINNT < 0x0600</blockquote>
 

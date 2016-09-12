@@ -4,14 +4,14 @@
 
 ## Requirements
 
-Visual C++ 11.0 (Visual Studio 2012/Visual Studio 2013).
+Visual C++ 11.0 (Visual Studio 2012).
 
 
 ## Setup
-Install Visual Studio 2012/Visual Studio 2013.
+Install Visual Studio 2012.
 
 ##Command prompt
-Open the “VS2012/VS2013 xXX Native Tools Command Prompt”
+Open the “VS2012 xXX Native Tools Command Prompt”
 
 
 # Download prerequisites/sources

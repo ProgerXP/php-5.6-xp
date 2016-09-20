@@ -230,12 +230,13 @@ int WSASendMsg(  <br />
 }  <br />
 #endif</blockquote>
 
-8. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:<br />
-Add lines at the begining:<br />
+8. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:
+Add lines to the top of file:<br />
 <blockquote><br />
 #if defined(ZTS) && defined(PHP_WIN32)<br />
 #include "TLSVar.h"<br />
 #endif<br />
+</blockquote>
 <br />
 Replace code block:<br />
 <blockquote><br />

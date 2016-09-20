@@ -238,16 +238,16 @@ Add lines to the top of file:<br />
 #endif<br />
 </blockquote>
 <br />
-Replace code block:<br />
+Replace code block:
 <blockquote><br />
 __declspec(thread)<br />
 </blockquote>
-with:<br />
+with:
 <blockquote>
 TLSVar tls_temporary_directory = {0};<br />
-</blockquote><br />
-
-Add code at start of php_shutdown_temporary_directory():<br />
+</blockquote>
+<br />
+Add code at start of php_shutdown_temporary_directory():
 <blockquote>
 #if defined(ZTS) && defined(PHP_WIN32)<br />
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
@@ -261,7 +261,7 @@ Add code at start of php_get_temporary_directory():<br />
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
 #endif<br />
 </blockquote>
-
+<br />
 Before each line:
 <blockquote>
   return temporary_directory;<br />
@@ -271,6 +271,37 @@ Insert next code:
 #if defined(ZTS) && defined(PHP_WIN32)<br />
   tls_set(&tls_temporary_directory, temporary_directory);<br />
 #endif<br />
+</blockquote>
+
+9. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c:<br />
+Add lines to the top of file:<br />
+<blockquote><br />
+#if defined(ZTS) && defined(PHP_WIN32)<br />
+#include "../main/TLSVar.h"<br />
+#endif<br />
+</blockquote>
+<br />
+Replace code block:
+<blockquote><br />
+__declspec(thread)<br />
+</blockquote>
+with:
+<blockquote>
+TLSVar tls_tq_timer = {0};<br />
+</blockquote>
+<br />
+Add code at start of zend_set_timeout() and zend_unset_timeout():
+<blockquote>
+#if defined(ZEND_WIN32) && defined(ZTS)<br />
+	tls_init(&tls_tq_timer);<br />
+	tq_timer = (HANDLE)tls_get(&tls_tq_timer);<br />
+#endif
+</blockquote>
+After each tq_timer assignment add next lines:
+<blockquote>
+#if defined(ZEND_WIN32) && defined(ZTS)<br />
+			tls_set(&tls_tq_timer, tq_timer);<br />
+#endif
 </blockquote>
 					
 #Build extensions

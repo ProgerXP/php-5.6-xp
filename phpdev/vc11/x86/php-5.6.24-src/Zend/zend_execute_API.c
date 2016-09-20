@@ -38,6 +38,10 @@
 #include <sys/time.h>
 #endif
 
+#if defined(ZEND_WIN32) && defined(ZTS)
+#include "../main/TlsVar.h"
+#endif
+
 ZEND_API void (*zend_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
 ZEND_API void (*zend_execute_internal)(zend_execute_data *execute_data_ptr, zend_fcall_info *fci, int return_value_used TSRMLS_DC);
 
@@ -47,7 +51,7 @@ ZEND_API const zend_fcall_info_cache empty_fcall_info_cache = { 0, NULL, NULL, N
 
 #ifdef ZEND_WIN32
 #ifdef ZTS
-__declspec(thread)
+TLSVar tls_tq_timer = {0};
 #endif
 HANDLE tq_timer = NULL;
 #endif
@@ -1265,23 +1269,39 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
         /* Don't use ChangeTimerQueueTimer() as it will not restart an expired
 		timer, so we could end up with just an ignored timeout. Instead
 		delete and recreate. */
+#if defined(ZEND_WIN32) && defined(ZTS)
+	tls_init(&tls_tq_timer);
+	tq_timer = (HANDLE)tls_get(&tls_tq_timer);
+#endif
 	if (NULL != tq_timer) {
 		if (!DeleteTimerQueueTimer(NULL, tq_timer, NULL)) {
 			EG(timed_out) = 0;
 			tq_timer = NULL;
+#if defined(ZEND_WIN32) && defined(ZTS)
+			tls_set(&tls_tq_timer, tq_timer);
+#endif
 			zend_error(E_ERROR, "Could not delete queued timer");
 			return;
 		}
 		tq_timer = NULL;
+#if defined(ZEND_WIN32) && defined(ZTS)
+		tls_set(&tls_tq_timer, tq_timer);
+#endif
 	}
 
 	/* XXX passing NULL means the default timer queue provided by the system is used */
 	if (!CreateTimerQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*)&EG(timed_out), seconds*1000, 0, WT_EXECUTEONLYONCE)) {
 		EG(timed_out) = 0;
 		tq_timer = NULL;
+#if defined(ZEND_WIN32) && defined(ZTS)
+		tls_set(&tls_tq_timer, tq_timer);
+#endif
 		zend_error(E_ERROR, "Could not queue new timer");
 		return;
 	}
+#if defined(ZEND_WIN32) && defined(ZTS)
+	tls_set(&tls_tq_timer, tq_timer);
+#endif
 	EG(timed_out) = 0;
 #else
 #	ifdef HAVE_SETITIMER
@@ -1324,14 +1344,24 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 void zend_unset_timeout(TSRMLS_D) /* {{{ */
 {
 #ifdef ZEND_WIN32
+#if defined(ZEND_WIN32) && defined(ZTS)
+	tls_init(&tls_tq_timer);
+	tq_timer = (HANDLE)tls_get(&tls_tq_timer);
+#endif
 	if (NULL != tq_timer) {
 		if (!DeleteTimerQueueTimer(NULL, tq_timer, NULL)) {
 			EG(timed_out) = 0;
 			tq_timer = NULL;
+#if defined(ZEND_WIN32) && defined(ZTS)
+			tls_set(&tls_tq_timer, tq_timer);
+#endif
 			zend_error(E_ERROR, "Could not delete queued timer");
 			return;
 		}
 		tq_timer = NULL;
+#if defined(ZEND_WIN32) && defined(ZTS)
+		tls_set(&tls_tq_timer, tq_timer);
+#endif
 	}
 	EG(timed_out) = 0;
 #else

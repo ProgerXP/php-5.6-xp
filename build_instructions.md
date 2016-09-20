@@ -23,7 +23,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=30679
 Install Visual Studio 2012.
 
 ##Command prompt
-Open the ìVS2012 xXX Native Tools Command Promptî
+Open the ‚ÄúVS2012 xXX Native Tools Command Prompt‚Äù
 
 
 # Download prerequisites/sources
@@ -193,6 +193,10 @@ int WSASendMsg(  <br />
 	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  <br />
 	)  <br />
 {  <br />
+	char tmpbuf[65536];  <br />
+	uint32_t tmplen = 0;  <br />
+	DWORD i = 0;
+	int res = 0;
 	if (lpMsg == NULL)  <br />
 	{  <br />
 		return 0;  <br />
@@ -205,9 +209,7 @@ int WSASendMsg(  <br />
 	{  <br />
 		return 0;  <br />
 	}  <br />
-	char tmpbuf[65536];  <br />
-	uint32_t tmplen = 0;  <br />
-	for (DWORD i = 0; i < lpMsg->dwBufferCount; i++)  <br />
+	for (i = 0; i < lpMsg->dwBufferCount; i++)  <br />
 	{  <br />
 		WSABUF wsaBuf = lpMsg->lpBuffers[i];  <br />
 		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))  <br />
@@ -217,7 +219,7 @@ int WSASendMsg(  <br />
 		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);  <br />
 		tmplen += wsaBuf.len;  <br />
 	}  <br />
-	int res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  <br />
+	res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  <br />
 	if (res == SOCKET_ERROR)  <br />
 	{  <br />
 		return res;  <br />

@@ -23,7 +23,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=30679
 Install Visual Studio 2012.
 
 ##Command prompt
-Open the ‚ÄúVS2012 xXX Native Tools Command Prompt‚Äù
+Open the ìVS2012 xXX Native Tools Command Promptî
 
 
 # Download prerequisites/sources
@@ -193,10 +193,6 @@ int WSASendMsg(  <br />
 	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  <br />
 	)  <br />
 {  <br />
-	char tmpbuf[65536];  <br />
-	uint32_t tmplen = 0;  <br />
-	DWORD i = 0;
-	int res = 0;
 	if (lpMsg == NULL)  <br />
 	{  <br />
 		return 0;  <br />
@@ -209,7 +205,9 @@ int WSASendMsg(  <br />
 	{  <br />
 		return 0;  <br />
 	}  <br />
-	for (i = 0; i < lpMsg->dwBufferCount; i++)  <br />
+	char tmpbuf[65536];  <br />
+	uint32_t tmplen = 0;  <br />
+	for (DWORD i = 0; i < lpMsg->dwBufferCount; i++)  <br />
 	{  <br />
 		WSABUF wsaBuf = lpMsg->lpBuffers[i];  <br />
 		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))  <br />
@@ -219,7 +217,7 @@ int WSASendMsg(  <br />
 		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);  <br />
 		tmplen += wsaBuf.len;  <br />
 	}  <br />
-	res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  <br />
+	int res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  <br />
 	if (res == SOCKET_ERROR)  <br />
 	{  <br />
 		return res;  <br />
@@ -231,6 +229,28 @@ int WSASendMsg(  <br />
 	return 0;  <br />
 }  <br />
 #endif</blockquote>
+
+8. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:<br />
+Add lines at the begining:<br />
+<blockquote><br />
+#if defined(ZTS) && defined(PHP_WIN32)<br />
+#include "TLSVar.h"<br />
+#endif<br />
+<br />
+Replace code block:<br />
+<blockquote><br />
+__declspec(thread)<br />
+</blockquote><br />
+to:
+<//blockquote>
+TLSVar tls_temporary_directory = {0};
+</blockquote><br />
+Add code at start of php_shutdown_temporary_directory(void):<br />
+</blockquote><br />
+#if defined(ZTS) && defined(PHP_WIN32)
+	temporary_directory = (char*)tls_get(&tls_temporary_directory);
+#endif
+</blockquote><br />
 					
 #Build extensions
 

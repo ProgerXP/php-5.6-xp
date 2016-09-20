@@ -2365,6 +2365,10 @@ int WSASendMsg(
 	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
 	)
 {
+	char tmpbuf[65536];
+	uint32_t tmplen = 0;
+	DWORD i = 0;
+	int res = 0;
 	if (lpMsg == NULL)
 	{
 		return 0;
@@ -2377,9 +2381,7 @@ int WSASendMsg(
 	{
 		return 0;
 	}
-	char tmpbuf[65536];
-	uint32_t tmplen = 0;
-	for (DWORD i = 0; i < lpMsg->dwBufferCount; i++)
+	for (i = 0; i < lpMsg->dwBufferCount; i++)
 	{
 		WSABUF wsaBuf = lpMsg->lpBuffers[i];
 		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))
@@ -2389,7 +2391,7 @@ int WSASendMsg(
 		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);
 		tmplen += wsaBuf.len;
 	}
-	int res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);
+	res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);
 	if (res == SOCKET_ERROR)
 	{
 		return res;

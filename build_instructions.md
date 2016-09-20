@@ -246,12 +246,32 @@ with:<br />
 <blockquote>
 TLSVar tls_temporary_directory = {0};<br />
 </blockquote><br />
+
 Add code at start of php_shutdown_temporary_directory():<br />
 <blockquote>
 #if defined(ZTS) && defined(PHP_WIN32)<br />
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
 #endif<br />
-</blockquote><br />
+</blockquote>
+
+Add code at start of php_get_temporary_directory():<br />
+<blockquote>
+#if defined(ZTS) && defined(PHP_WIN32)<br />
+	tls_init(&temporary_directory);<br />
+	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
+#endif<br />
+</blockquote>
+
+Before each line:
+<blockquote>
+  return temporary_directory;<br />
+</blockquote>
+Insert next code:
+<blockquote>
+#if defined(ZTS) && defined(PHP_WIN32)<br />
+  tls_set(&tls_temporary_directory, temporary_directory);<br />
+#endif<br />
+</blockquote>
 					
 #Build extensions
 

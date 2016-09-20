@@ -230,7 +230,7 @@ int WSASendMsg(  <br />
 }  <br />
 #endif</blockquote>
 
-8. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:
+8. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:<br />
 Add lines to the top of file:<br />
 <blockquote><br />
 #if defined(ZTS) && defined(PHP_WIN32)<br />
@@ -242,12 +242,12 @@ Replace code block:<br />
 <blockquote><br />
 __declspec(thread)<br />
 </blockquote><br />
-to:
-<//blockquote>
-TLSVar tls_temporary_directory = {0};
+with:<br />
+<blockquote>
+TLSVar tls_temporary_directory = {0};<br />
 </blockquote><br />
-Add code at start of php_shutdown_temporary_directory(void):<br />
-</blockquote><br />
+Add code at start of php_shutdown_temporary_directory():<br />
+<blockquote><br />
 #if defined(ZTS) && defined(PHP_WIN32)
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);
 #endif

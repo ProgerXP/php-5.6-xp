@@ -241,16 +241,16 @@ Add lines to the top of file:<br />
 Replace code block:<br />
 <blockquote><br />
 __declspec(thread)<br />
-</blockquote><br />
+</blockquote>
 with:<br />
 <blockquote>
 TLSVar tls_temporary_directory = {0};<br />
 </blockquote><br />
 Add code at start of php_shutdown_temporary_directory():<br />
-<blockquote><br />
-#if defined(ZTS) && defined(PHP_WIN32)
-	temporary_directory = (char*)tls_get(&tls_temporary_directory);
-#endif
+<blockquote>
+#if defined(ZTS) && defined(PHP_WIN32)<br />
+	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
+#endif<br />
 </blockquote><br />
 					
 #Build extensions

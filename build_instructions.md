@@ -230,7 +230,15 @@ int WSASendMsg(  <br />
 }  <br />
 #endif</blockquote>
 
-8. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:<br />
+8. Download files [TlsVar.c](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/TlsVar.c)/[TlsVar.h](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/TlsVar.h) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main
+
+9. Modify file C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:<br />
+	`php_open_temporary_file.c output.c internal_functions.c php_sprintf.c");`  
+      	*change to:*  
+	`php_open_temporary_file.c TlsVar.c output.c internal_functions.c php_sprintf.c");`
+
+
+10. Change file C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:<br />
 Add lines to the top of file:<br />
 <blockquote><br />
 #if defined(ZTS) && defined(PHP_WIN32)<br />
@@ -273,7 +281,7 @@ Insert next code:
 #endif<br />
 </blockquote>
 
-9. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c:<br />
+11. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c:<br />
 Add lines to the top of file:<br />
 <blockquote><br />
 #if defined(ZTS) && defined(PHP_WIN32)<br />

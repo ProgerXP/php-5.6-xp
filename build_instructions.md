@@ -23,7 +23,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=30679
 Install Visual Studio 2012.
 
 ##Command prompt
-Open the ìVS2012 xXX Native Tools Command Promptî
+Open the ‚ÄúVS2012 xXX Native Tools Command Prompt‚Äù
 
 
 # Download prerequisites/sources
@@ -125,7 +125,7 @@ Open the ìVS2012 xXX Native Tools Command Promptî
 					
 6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:  
 <blockquote>
-#if (_WIN32_WINNT < 0x0600)<br />
+#if (_WIN32_WINNT &lt; 0x0600)<br />
 #define CMSG_SPACE WSA_CMSG_SPACE<br />
 #define CMSG_LEN WSA_CMSG_LEN<br />
 #define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR<br />
@@ -141,11 +141,11 @@ int WSASendMsg(  <br />
         __inout_opt LPWSAOVERLAPPED lpOverlapped,<br />
         __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine<br />
     );  
-\#endif //_WIN32_WINNT < 0x0600</blockquote>
+\#endif //_WIN32_WINNT &lt; 0x0600</blockquote>
 
 7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:
 <blockquote>
-#if (_WIN32_WINNT < 0x0600)  <br />
+#if (_WIN32_WINNT &lt; 0x0600)  <br />
 WINAPI if_nametoindex (__in PCSTR iface)  <br />
 {  <br />
 	PIP_ADAPTER_ADDRESSES addresses = NULL, p;  <br />

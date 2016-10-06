@@ -9,7 +9,7 @@ https://wiki.php.net/internals/windows/stepbystepbuild
 
 ## Requirements
 
-Visual C++ 11.0 (Visual Studio 2012) for PHP 5.6.
+Visual C++ 11.0 (Visual Studio 2012 <b>SP1+</b>) for PHP 5.6.
 
 Launching PHP in Windows XP requires corresponding runtime components installed.  
 *For x86*: [vcredist_x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredist_x86.exe)  

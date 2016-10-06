@@ -20,7 +20,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=30679
 
 
 ## Setup
-Install Visual Studio 2012.
+Install Visual Studio 2012 with at least SP1.
 
 ##Command prompt
 Open the “VS2012 xXX Native Tools Command Prompt”
@@ -315,13 +315,13 @@ After each tq_timer assignment add next lines:
 #Build extensions
 
 1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)  
-    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl\bin\curl.exe  
+    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi-obj-lib\bin\curl.exe  
            *to*  
            C:\php-sdk\phpdev\vc11\xXX\deps\bin  
-    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl\include\\*  
+    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi-obj-lib\include\\*  
           *to*  
            C:\php-sdk\phpdev\vc11\xXX\deps\include  
-    * Copy C:\php-sdk\extensions\curl-7.50.1\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl\lib\libcurl_a.lib  
+    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi-obj-lib\lib\libcurl_a.lib  
           *to*  
           C:\php-sdk\phpdev\vc11\xXX\deps\lib
 

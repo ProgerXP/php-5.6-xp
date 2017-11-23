@@ -29,8 +29,9 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 # Download prerequisites/sources
 1. Get the PHP sources [php-5.6.24-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.6.24-src.zip)
 2. Get the PHP sources [php-5.4.9-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.4.9-src.zip)
-3. Get the PHP [binary tools](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-sdk-binary-tools-20110915.zip)
-4. Get the libraries on which PHP depends:
+3. Get the *patched* PHP sources [php-5.6.24-xp-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.6.24-xp-src.zip)
+4. Get the PHP [binary tools](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-sdk-binary-tools-20110915.zip)
+5. Get the libraries on which PHP depends:
     * [dependency archive for x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/deps-5.6-vc11-x86.7z)
     * [dependency archive for x64](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/deps-5.6-vc11-x64.7z)
 
@@ -44,7 +45,7 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 4. Run the buildtree batch script which will create the desired directory structure:
 <blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>
 5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11
-6. Extract the PHP source code (5.6.24) to C:\php-sdk\phpdev\vc11\xXX  
+6. Extract the *patched* PHP source code (5.6.24) to C:\php-sdk\phpdev\vc11\xXX  
    For example: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src
 7. Extract dependency libraries to build PHP:
     * deps-5.6-vc11-xXX.7z *to* C:\php-sdk\phpdev\vc11\xXX\
@@ -58,7 +59,7 @@ Open the “VS2012 xXX Native Tools Command Prompt”
     `set PATH=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Bin;%PATH%`  
     `set LIB=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A\Lib\x64;%LIB%`  
 
-# Source code adjustments
+# Source code adjustments (manual patching of the original PHP sources)
 
 1. Set up nmake using v110_xp toolset:
     * Add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:
@@ -81,7 +82,7 @@ Open the “VS2012 xXX Native Tools Command Prompt”
       *change to:*  
       `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));`  
 4. Extract files win32\inet.h, win32\inet.c from PHP sources (5.4.9) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\ (overwrite existing files).  
-5. Comment lines in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\standard\info.c:  
+5. Remove next lines from C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\standard\info.c:  
 <blockquote>
 /*				case PRODUCT_ENTERPRISE_EVALUATION:  <br />
 					sub = "Enterprise Edition (evaluation installation)";  <br />
@@ -232,19 +233,19 @@ int WSASendMsg(  <br />
 }  <br />
 #endif</blockquote>
 
-8. Download files [TlsVar.c](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/TlsVar.c)/[TlsVar.h](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/TlsVar.h) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main
+8. Download files [tls_var.c](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/tls_var.c)/[tls_var.h](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/tls_var.h) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main
 
 9. Modify file C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:<br />
 	`php_open_temporary_file.c output.c internal_functions.c php_sprintf.c");`  
       	*change to:*  
-	`php_open_temporary_file.c TlsVar.c output.c internal_functions.c php_sprintf.c");`
+	`php_open_temporary_file.c tls_var.c output.c internal_functions.c php_sprintf.c");`
 
 
 10. Change file C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:<br />
 Add lines to the top of file:<br />
 <blockquote><br />
 #if defined(ZTS) && defined(PHP_WIN32)<br />
-#include "TLSVar.h"<br />
+#include "tls_var.h"<br />
 #endif<br />
 </blockquote>
 <br />
@@ -287,7 +288,7 @@ Insert next code:
 Add lines to the top of file:<br />
 <blockquote><br />
 #if defined(ZTS) && defined(PHP_WIN32)<br />
-#include "../main/TLSVar.h"<br />
+#include "../main/tls_var.h"<br />
 #endif<br />
 </blockquote>
 <br />
@@ -317,13 +318,13 @@ After each tq_timer assignment add next lines:
 #Build extensions
 
 1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)  
-    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi-obj-lib\bin\curl.exe  
+    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\bin\curl.exe  
            *to*  
            C:\php-sdk\phpdev\vc11\xXX\deps\bin  
-    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi-obj-lib\include\\*  
+    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\include\\*  
           *to*  
            C:\php-sdk\phpdev\vc11\xXX\deps\include  
-    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi-obj-lib\lib\libcurl_a.lib  
+    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\lib\libcurl_a.lib  
           *to*  
           C:\php-sdk\phpdev\vc11\xXX\deps\lib
 

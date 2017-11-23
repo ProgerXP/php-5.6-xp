@@ -42,7 +42,7 @@ Set up nmake using v110_xp toolset in file C:\php-sdk\phpdev\extensions\curl-7.5
     * *For x86*:
       <blockquote>nmake /f Makefile.vc mode=static VC=11 USE_IDN=0 WITH_SSL=static WITH_DEVEL="..\..\..\phpdev\vc11\x86\deps"</blockquote>
     * *For x64*:
-      <blockquote>nmake /f Makefile.vc mode=static VC=11 USE_IDN=0 WITH_SSL=static WITH_DEVEL="..\..\..\phpdev\vc11\x86\deps" MACHINE=x64</blockquote>
+      <blockquote>nmake /f Makefile.vc mode=static VC=11 USE_IDN=0 WITH_SSL=static WITH_DEVEL="..\..\..\phpdev\vc11\x64\deps" MACHINE=x64</blockquote>
 4. Destination folder for binaries:<br/>
       C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl<br/>
   

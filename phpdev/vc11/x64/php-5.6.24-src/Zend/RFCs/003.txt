@@ -1,5 +1,5 @@
 Title:           Loose type requirements for functions
-Version:         $Id: ac042183d426c1601b2b8d85842ddfb28694e3bf $
+Version:         $Id$
 Status:          draft
 Maintainer:      Brian Moon <brianm@dealnews.com>
 Created:         2001-09-17

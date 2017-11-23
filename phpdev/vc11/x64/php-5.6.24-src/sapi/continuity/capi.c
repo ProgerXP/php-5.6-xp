@@ -110,7 +110,7 @@ PHP_MSHUTDOWN_FUNCTION(continuity)
 PHP_MINFO_FUNCTION(continuity)
 {
         php_info_print_table_start();
-        php_info_print_table_row(2, "Continuity Module Revision", "$Id: 56ead374990d554956cb24fc788773a42f46d2c0 $");
+        php_info_print_table_row(2, "Continuity Module Revision", "$Id$");
         php_info_print_table_row(2, "Server Version", conFget_build());
 #ifdef CONTINUITY_CDPEXT
 	php_info_print_table_row(2,"CDP Extensions", "enabled");

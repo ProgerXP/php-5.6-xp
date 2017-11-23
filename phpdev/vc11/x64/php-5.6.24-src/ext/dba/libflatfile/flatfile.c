@@ -19,7 +19,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: 6de5fe322d62526de9b1667b16d48cd25e15bd09 $ */
+/* $Id$ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -286,7 +286,7 @@ datum flatfile_nextkey(flatfile *dba TSRMLS_DC) {
 /* {{{ flatfile_version */
 char *flatfile_version() 
 {
-	return "1.0, $Id: 6de5fe322d62526de9b1667b16d48cd25e15bd09 $";
+	return "1.0, $Id$";
 }
 /* }}} */ 
 

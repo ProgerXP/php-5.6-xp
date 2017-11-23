@@ -592,45 +592,6 @@ char* php_get_windows_name()
 				case PRODUCT_STARTER_E:
 					sub = "Hyper Core V Edition";
 					break;
-/*				case PRODUCT_ENTERPRISE_EVALUATION:
-					sub = "Enterprise Edition (evaluation installation)";
-					break;
-				case PRODUCT_MULTIPOINT_STANDARD_SERVER:
-					sub = "MultiPoint Server Standard Edition (full installation)";
-					break;
-				case PRODUCT_MULTIPOINT_PREMIUM_SERVER:
-					sub = "MultiPoint Server Premium Edition (full installation)";
-					break;
-				case PRODUCT_STANDARD_EVALUATION_SERVER:
-					sub = "Standard Edition (evaluation installation)";
-					break;
-				case PRODUCT_DATACENTER_EVALUATION_SERVER:
-					sub = "Datacenter Edition (evaluation installation)";
-					break;
-				case PRODUCT_ENTERPRISE_N_EVALUATION:
-					sub = "Enterprise N Edition (evaluation installation)";
-					break;
-				case PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER:
-					sub = "Storage Server Workgroup Edition (evaluation installation)";
-					break;
-				case PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER:
-					sub = "Storage Server Standard Edition (evaluation installation)";
-					break;
-				case PRODUCT_CORE_N:
-					sub = "Windows 8 N Edition";
-					break;
-				case PRODUCT_CORE_COUNTRYSPECIFIC:
-					sub = "Windows 8 China Edition";
-					break;
-				case PRODUCT_CORE_SINGLELANGUAGE:
-					sub = "Windows 8 Single Language Edition";
-					break;
-				case PRODUCT_CORE:
-					sub = "Windows 8 Edition";
-					break;
-				case PRODUCT_PROFESSIONAL_WMC:
-					sub = "Professional with Media Center Edition";
-					break;*/
 			}
 		}
 

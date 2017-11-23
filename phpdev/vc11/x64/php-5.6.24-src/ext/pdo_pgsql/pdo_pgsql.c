@@ -16,7 +16,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: 0e858dd2051ca8c2fd3c781909a0670ab5fecd36 $ */
+/* $Id$ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -117,7 +117,7 @@ PHP_MINFO_FUNCTION(pdo_pgsql)
 	php_info_print_table_row(2, "PostgreSQL(libpq) Version", PG_VERSION);
 #endif	
 	php_info_print_table_row(2, "Module version", pdo_pgsql_module_entry.version);
-	php_info_print_table_row(2, "Revision", " $Id: 0e858dd2051ca8c2fd3c781909a0670ab5fecd36 $ ");
+	php_info_print_table_row(2, "Revision", " $Id$ ");
 
 	php_info_print_table_end();
 }

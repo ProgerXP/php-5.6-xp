@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: 0feb5f1bb2dedc695bdc3e484c9bbcb69e863a84 $ */
+/* $Id$ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -42,7 +42,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Id: 0feb5f1bb2dedc695bdc3e484c9bbcb69e863a84 $";
+	return "1.0, $Id$";
 }
 /* }}} */ 
 

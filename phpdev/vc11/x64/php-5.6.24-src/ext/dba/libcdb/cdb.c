@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: 2b0c194e65d990aef32405edbeb3b344a9a7ae5f $ */
+/* $Id$ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -189,6 +189,6 @@ int cdb_find(struct cdb *c, char *key, unsigned int len TSRMLS_DC)
 /* {{{ cdb_version */
 char *cdb_version() 
 {
-	return "0.75, $Id: 2b0c194e65d990aef32405edbeb3b344a9a7ae5f $";
+	return "0.75, $Id$";
 }
 /* }}} */

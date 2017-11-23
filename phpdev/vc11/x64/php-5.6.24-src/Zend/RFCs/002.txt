@@ -1,5 +1,5 @@
 Title:           Zend 2.0 Namespaces
-Version:         $Id: 7d7cb885d85b5ffc3f7e14171bb226b1e3c711a4 $
+Version:         $Id$
 Status:          declined
 Maintainer:      Stig S. Bakken <ssb@php.net>
 Created:         2001-09-08

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: e9b9adf7a0b6013cd1edfc7811d033be510dd9f2 $ */
+/* $Id$ */
 
 /* incorporated from D.J.Bernstein's cdb-0.75 (http://cr.yp.to/cdb.html)*/
 
@@ -240,5 +240,5 @@ int cdb_make_finish(struct cdb_make *c TSRMLS_DC)
 /* {{{ cdb_make_version */
 char *cdb_make_version() 
 {
-	return "0.75, $Id: e9b9adf7a0b6013cd1edfc7811d033be510dd9f2 $";
+	return "0.75, $Id$";
 }

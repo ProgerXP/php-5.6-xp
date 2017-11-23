@@ -17,12 +17,12 @@
   |          Georg Richter <georg@mysql.com>                             |
   +----------------------------------------------------------------------+
 */
-/* $Id: 76b08b24596e12d4553bd41fc93cccd5bac2fe7a $ */
+/* $Id$ */
 
 #ifndef MYSQLND_H
 #define MYSQLND_H
 
-#define MYSQLND_VERSION "mysqlnd 5.0.11-dev - 20120503 - $Id: 76b08b24596e12d4553bd41fc93cccd5bac2fe7a $"
+#define MYSQLND_VERSION "mysqlnd 5.0.11-dev - 20120503 - $Id$"
 #define MYSQLND_VERSION_ID 50011
 
 #define MYSQLND_PLUGIN_API_VERSION 2

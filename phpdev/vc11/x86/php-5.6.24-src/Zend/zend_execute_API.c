@@ -38,8 +38,8 @@
 #include <sys/time.h>
 #endif
 
-#if defined(ZEND_WIN32) && defined(ZTS)
-#include "../main/TlsVar.h"
+#if defined(ZTS) && defined(PHP_WIN32)
+#include "../main/tls_var.h"
 #endif
 
 ZEND_API void (*zend_execute_ex)(zend_execute_data *execute_data TSRMLS_DC);
@@ -1266,13 +1266,14 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 		return;
 	}
 
-        /* Don't use ChangeTimerQueueTimer() as it will not restart an expired
-		timer, so we could end up with just an ignored timeout. Instead
-		delete and recreate. */
 #if defined(ZEND_WIN32) && defined(ZTS)
 	tls_init(&tls_tq_timer);
 	tq_timer = (HANDLE)tls_get(&tls_tq_timer);
 #endif
+
+        /* Don't use ChangeTimerQueueTimer() as it will not restart an expired
+		timer, so we could end up with just an ignored timeout. Instead
+		delete and recreate. */
 	if (NULL != tq_timer) {
 		if (!DeleteTimerQueueTimer(NULL, tq_timer, NULL)) {
 			EG(timed_out) = 0;
@@ -1299,9 +1300,6 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 		zend_error(E_ERROR, "Could not queue new timer");
 		return;
 	}
-#if defined(ZEND_WIN32) && defined(ZTS)
-	tls_set(&tls_tq_timer, tq_timer);
-#endif
 	EG(timed_out) = 0;
 #else
 #	ifdef HAVE_SETITIMER
@@ -1343,11 +1341,11 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 
 void zend_unset_timeout(TSRMLS_D) /* {{{ */
 {
-#ifdef ZEND_WIN32
 #if defined(ZEND_WIN32) && defined(ZTS)
 	tls_init(&tls_tq_timer);
 	tq_timer = (HANDLE)tls_get(&tls_tq_timer);
 #endif
+#ifdef ZEND_WIN32
 	if (NULL != tq_timer) {
 		if (!DeleteTimerQueueTimer(NULL, tq_timer, NULL)) {
 			EG(timed_out) = 0;

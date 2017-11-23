@@ -17,7 +17,7 @@
   +----------------------------------------------------------------------+
 */
 
-/* $Id: 14b80e175ed4d5bf11c890e1f30ea8225935b16c $ */
+/* $Id$ */
 
 #define PHAR_MAIN 1
 #include "phar_internal.h"
@@ -3583,7 +3583,7 @@ PHP_MINFO_FUNCTION(phar) /* {{{ */
 	php_info_print_table_header(2, "Phar: PHP Archive support", "enabled");
 	php_info_print_table_row(2, "Phar EXT version", PHP_PHAR_VERSION);
 	php_info_print_table_row(2, "Phar API version", PHP_PHAR_API_VERSION);
-	php_info_print_table_row(2, "SVN revision", "$Id: 14b80e175ed4d5bf11c890e1f30ea8225935b16c $");
+	php_info_print_table_row(2, "SVN revision", "$Id$");
 	php_info_print_table_row(2, "Phar-based phar archives", "enabled");
 	php_info_print_table_row(2, "Tar-based phar archives", "enabled");
 	php_info_print_table_row(2, "ZIP-based phar archives", "enabled");

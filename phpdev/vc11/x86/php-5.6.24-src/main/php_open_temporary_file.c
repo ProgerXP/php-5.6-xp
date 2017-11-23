@@ -58,7 +58,7 @@
 #endif
 
 #if defined(ZTS) && defined(PHP_WIN32)
-#include "TLSVar.h"
+#include "tls_var.h"
 #endif
 
 /* {{{ php_do_open_temporary_file */
@@ -206,12 +206,15 @@ PHPAPI void php_shutdown_temporary_directory(void)
  */
 PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 {
-	/* Did we determine the temporary directory already? */
 #if defined(ZTS) && defined(PHP_WIN32)
 	tls_init(&temporary_directory);
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);
 #endif
+	/* Did we determine the temporary directory already? */
 	if (temporary_directory) {
+#if defined(ZTS) && defined(PHP_WIN32)
+		tls_set(&tls_temporary_directory, temporary_directory);
+#endif
 		return temporary_directory;
 	}
 
@@ -268,6 +271,7 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 			} else {
 				temporary_directory = estrndup(s, len);
 			}
+
 #if defined(ZTS) && defined(PHP_WIN32)
 			tls_set(&tls_temporary_directory, temporary_directory);
 #endif
@@ -286,7 +290,9 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 #endif
 	/* Shouldn't ever(!) end up here ... last ditch default. */
 	temporary_directory = estrndup("/tmp", sizeof("/tmp"));
-	tls_set(&temporary_directory, temporary_directory);
+#if defined(ZTS) && defined(PHP_WIN32)
+	tls_set(&tls_temporary_directory, temporary_directory);
+#endif
 	return temporary_directory;
 #endif
 }

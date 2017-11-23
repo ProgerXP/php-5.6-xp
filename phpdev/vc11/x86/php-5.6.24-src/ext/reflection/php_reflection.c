@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id: fbcf7a77ca8e3d4cd7501de8025235b947b8240f $ */
+/* $Id$ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -6263,7 +6263,7 @@ PHP_MINFO_FUNCTION(reflection) /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_header(2, "Reflection", "enabled");
 
-	php_info_print_table_row(2, "Version", "$Id: fbcf7a77ca8e3d4cd7501de8025235b947b8240f $");
+	php_info_print_table_row(2, "Version", "$Id$");
 
 	php_info_print_table_end();
 } /* }}} */
@@ -6277,7 +6277,7 @@ zend_module_entry reflection_module_entry = { /* {{{ */
 	NULL,
 	NULL,
 	PHP_MINFO(reflection),
-	"$Id: fbcf7a77ca8e3d4cd7501de8025235b947b8240f $",
+	"$Id$",
 	STANDARD_MODULE_PROPERTIES
 }; /* }}} */
 

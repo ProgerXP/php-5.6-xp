@@ -23,7 +23,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id: 5ffc17b96f6abc34bc3607bc1131ea7a79586613 $ */
+/* $Id$ */
 #define IS_EXT_MODULE
 
 #ifdef HAVE_CONFIG_H
@@ -265,7 +265,7 @@ PHP_MINFO_FUNCTION(ldap)
 
 	php_info_print_table_start();
 	php_info_print_table_row(2, "LDAP Support", "enabled");
-	php_info_print_table_row(2, "RCS Version", "$Id: 5ffc17b96f6abc34bc3607bc1131ea7a79586613 $");
+	php_info_print_table_row(2, "RCS Version", "$Id$");
 
 	if (LDAPG(max_links) == -1) {
 		snprintf(tmp, 31, "%ld/unlimited", LDAPG(num_links));

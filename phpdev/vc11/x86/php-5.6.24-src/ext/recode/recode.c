@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id: 7d141e792814d03ddb57ddcd99eb2d91c360d09a $ */
+/* $Id$ */
 
 /* {{{ includes & prototypes */
 
@@ -135,7 +135,7 @@ PHP_MINFO_FUNCTION(recode)
 {
 	php_info_print_table_start();
 	php_info_print_table_row(2, "Recode Support", "enabled");
-	php_info_print_table_row(2, "Revision", "$Id: 7d141e792814d03ddb57ddcd99eb2d91c360d09a $");
+	php_info_print_table_row(2, "Revision", "$Id$");
 	php_info_print_table_end();
 }
 

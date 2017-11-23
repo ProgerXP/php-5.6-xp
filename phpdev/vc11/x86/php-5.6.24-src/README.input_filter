@@ -86,7 +86,7 @@ PHP_MINFO_FUNCTION(my_input_filter)
 {
     php_info_print_table_start();
     php_info_print_table_row( 2, "My Input Filter Support", "enabled" );
-    php_info_print_table_row( 2, "Revision", "$Id: e2941d029ee4e89f8880c46d41a7e8fc60a7fbc3 $");
+    php_info_print_table_row( 2, "Revision", "$Id$");
     php_info_print_table_end();
 }
 

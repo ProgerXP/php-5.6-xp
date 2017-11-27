@@ -29,7 +29,7 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 # Download prerequisites/sources
 1. Get the PHP sources [php-5.6.24-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.6.24-src.zip)
 2. Get the PHP sources [php-5.4.9-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.4.9-src.zip)
-3. Get the *patched* PHP sources [php-5.6.24-xp-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.6.24-xp-src.zip)
+3. Get the *patched* PHP sources [php-5.6.24-src-xp-patched.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.6.24-src-xp-patched.zip)
 4. Get the PHP [binary tools](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-sdk-binary-tools-20110915.zip)
 5. Get the libraries on which PHP depends:
     * [dependency archive for x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/deps-5.6-vc11-x86.7z)
@@ -255,19 +255,20 @@ __declspec(thread)<br />
 </blockquote>
 with:
 <blockquote>
+#define TLS_TEMPORARY_DIRECTORY<br />
 TLSVar tls_temporary_directory = {0};<br />
 </blockquote>
 <br />
 Add code at start of php_shutdown_temporary_directory():
 <blockquote>
-#if defined(ZTS) && defined(PHP_WIN32)<br />
+#ifdef TLS_TEMPORARY_DIRECTORY<br />
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
 #endif<br />
 </blockquote>
 
 Add code at start of php_get_temporary_directory():<br />
 <blockquote>
-#if defined(ZTS) && defined(PHP_WIN32)<br />
+#ifdef TLS_TEMPORARY_DIRECTORY<br />
 	tls_init(&temporary_directory);<br />
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
 #endif<br />
@@ -279,7 +280,7 @@ Before each line:
 </blockquote>
 Insert next code:
 <blockquote>
-#if defined(ZTS) && defined(PHP_WIN32)<br />
+#ifdef TLS_TEMPORARY_DIRECTORY<br />
   tls_set(&tls_temporary_directory, temporary_directory);<br />
 #endif<br />
 </blockquote>
@@ -298,19 +299,20 @@ __declspec(thread)<br />
 </blockquote>
 with:
 <blockquote>
+#define TLS_TQ_TIMER
 TLSVar tls_tq_timer = {0};<br />
 </blockquote>
 <br />
 Add code at start of zend_set_timeout() and zend_unset_timeout():
 <blockquote>
-#if defined(ZEND_WIN32) && defined(ZTS)<br />
+#ifdef TLS_TQ_TIMER<br />
 	tls_init(&tls_tq_timer);<br />
 	tq_timer = (HANDLE)tls_get(&tls_tq_timer);<br />
 #endif
 </blockquote>
 After each tq_timer assignment add next lines:
 <blockquote>
-#if defined(ZEND_WIN32) && defined(ZTS)<br />
+#ifdef TLS_TQ_TIMER<br />
 			tls_set(&tls_tq_timer, tq_timer);<br />
 #endif
 </blockquote>

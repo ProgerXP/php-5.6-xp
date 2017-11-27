@@ -51,6 +51,7 @@ ZEND_API const zend_fcall_info_cache empty_fcall_info_cache = { 0, NULL, NULL, N
 
 #ifdef ZEND_WIN32
 #ifdef ZTS
+#define TLS_TQ_TIMER
 TLSVar tls_tq_timer = {0};
 #endif
 HANDLE tq_timer = NULL;
@@ -1266,7 +1267,7 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 		return;
 	}
 
-#if defined(ZEND_WIN32) && defined(ZTS)
+#ifdef TLS_TQ_TIMER
 	tls_init(&tls_tq_timer);
 	tq_timer = (HANDLE)tls_get(&tls_tq_timer);
 #endif
@@ -1278,14 +1279,14 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 		if (!DeleteTimerQueueTimer(NULL, tq_timer, NULL)) {
 			EG(timed_out) = 0;
 			tq_timer = NULL;
-#if defined(ZEND_WIN32) && defined(ZTS)
+#ifdef TLS_TQ_TIMER
 			tls_set(&tls_tq_timer, tq_timer);
 #endif
 			zend_error(E_ERROR, "Could not delete queued timer");
 			return;
 		}
 		tq_timer = NULL;
-#if defined(ZEND_WIN32) && defined(ZTS)
+#ifdef TLS_TQ_TIMER
 		tls_set(&tls_tq_timer, tq_timer);
 #endif
 	}
@@ -1294,7 +1295,7 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 	if (!CreateTimerQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*)&EG(timed_out), seconds*1000, 0, WT_EXECUTEONLYONCE)) {
 		EG(timed_out) = 0;
 		tq_timer = NULL;
-#if defined(ZEND_WIN32) && defined(ZTS)
+#ifdef TLS_TQ_TIMER
 		tls_set(&tls_tq_timer, tq_timer);
 #endif
 		zend_error(E_ERROR, "Could not queue new timer");
@@ -1341,23 +1342,24 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 
 void zend_unset_timeout(TSRMLS_D) /* {{{ */
 {
-#if defined(ZEND_WIN32) && defined(ZTS)
+#ifdef TLS_TQ_TIMER
 	tls_init(&tls_tq_timer);
 	tq_timer = (HANDLE)tls_get(&tls_tq_timer);
 #endif
+
 #ifdef ZEND_WIN32
 	if (NULL != tq_timer) {
 		if (!DeleteTimerQueueTimer(NULL, tq_timer, NULL)) {
 			EG(timed_out) = 0;
 			tq_timer = NULL;
-#if defined(ZEND_WIN32) && defined(ZTS)
+#ifdef TLS_TQ_TIMER
 			tls_set(&tls_tq_timer, tq_timer);
 #endif
 			zend_error(E_ERROR, "Could not delete queued timer");
 			return;
 		}
 		tq_timer = NULL;
-#if defined(ZEND_WIN32) && defined(ZTS)
+#ifdef TLS_TQ_TIMER
 		tls_set(&tls_tq_timer, tq_timer);
 #endif
 	}

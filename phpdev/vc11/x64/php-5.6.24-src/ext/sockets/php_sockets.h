@@ -115,13 +115,6 @@ php_socket *socket_import_file_descriptor(PHP_SOCKET sock TSRMLS_DC);
 
 #endif
 
-/*
- * Local variables:
- * tab-width: 4
- * c-basic-offset: 4
- * End:
- */
-
 #if(_WIN32_WINNT < 0x0600)
 #define CMSG_SPACE WSA_CMSG_SPACE
 #define CMSG_LEN WSA_CMSG_LEN
@@ -139,3 +132,11 @@ int WSASendMsg(
     __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
     );
 #endif
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ */
+

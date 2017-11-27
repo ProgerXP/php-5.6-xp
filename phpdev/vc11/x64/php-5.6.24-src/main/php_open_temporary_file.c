@@ -183,6 +183,7 @@ static int php_do_open_temporary_file(const char *path, const char *pfx, char **
 static
 #ifdef ZTS
 #ifdef PHP_WIN32
+#define TLS_TEMPORARY_DIRECTORY
 TLSVar tls_temporary_directory = {0};
 #elif defined(__GNUC__)
 __thread
@@ -192,7 +193,7 @@ char* temporary_directory;
 
 PHPAPI void php_shutdown_temporary_directory(void)
 {
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);
 #endif
 	if (temporary_directory) {
@@ -206,13 +207,13 @@ PHPAPI void php_shutdown_temporary_directory(void)
  */
 PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 {
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 	tls_init(&temporary_directory);
 	temporary_directory = (char*)tls_get(&tls_temporary_directory);
 #endif
 	/* Did we determine the temporary directory already? */
 	if (temporary_directory) {
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 		tls_set(&tls_temporary_directory, temporary_directory);
 #endif
 		return temporary_directory;
@@ -225,13 +226,13 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 			int len = strlen(sys_temp_dir);
 			if (len >= 2 && sys_temp_dir[len - 1] == DEFAULT_SLASH) {
 				temporary_directory = estrndup(sys_temp_dir, len - 1);
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 				tls_set(&tls_temporary_directory, temporary_directory);
 #endif
 				return temporary_directory;
 			} else if (len >= 1 && sys_temp_dir[len - 1] != DEFAULT_SLASH) {
 				temporary_directory = estrndup(sys_temp_dir, len);
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 				tls_set(&tls_temporary_directory, temporary_directory);
 #endif
 				return temporary_directory;
@@ -254,7 +255,7 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 		} else {
 			temporary_directory = estrndup(sTemp, len);
 		}
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 		tls_set(&tls_temporary_directory, temporary_directory);
 #endif
 		return temporary_directory;
@@ -271,8 +272,7 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 			} else {
 				temporary_directory = estrndup(s, len);
 			}
-
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 			tls_set(&tls_temporary_directory, temporary_directory);
 #endif
 			return temporary_directory;
@@ -282,7 +282,7 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 	/* Use the standard default temporary directory. */
 	if (P_tmpdir) {
 		temporary_directory = estrdup(P_tmpdir);
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 		tls_set(&tls_temporary_directory, temporary_directory);
 #endif
 		return temporary_directory;
@@ -290,7 +290,7 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 #endif
 	/* Shouldn't ever(!) end up here ... last ditch default. */
 	temporary_directory = estrndup("/tmp", sizeof("/tmp"));
-#if defined(ZTS) && defined(PHP_WIN32)
+#ifdef TLS_TEMPORARY_DIRECTORY
 	tls_set(&tls_temporary_directory, temporary_directory);
 #endif
 	return temporary_directory;

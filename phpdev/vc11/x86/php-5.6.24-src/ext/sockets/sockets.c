@@ -2308,6 +2308,93 @@ PHP_FUNCTION(socket_import_stream)
 }
 /* }}} */
 
+#if (_WIN32_WINNT < 0x0600) 
+WINAPI if_nametoindex (__in PCSTR iface) 
+{ 
+    PIP_ADAPTER_ADDRESSES addresses = NULL, p; 
+    ulong addresses_len = 0; 
+    uint idx = 0; 
+    DWORD res; 
+
+    res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, NULL, &addresses_len); 
+    if (res != NO_ERROR && res != ERROR_BUFFER_OVERFLOW) 
+    { 
+        return 0; 
+    } 
+
+    addresses = malloc (addresses_len); 
+    res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, addresses, &addresses_len); 
+
+    if (res != NO_ERROR) 
+    { 
+        free (addresses); 
+        return 0; 
+    } 
+
+    p = addresses; 
+    while (p) 
+    { 
+        if (strcmp (p->AdapterName, iface) == 0) 
+        { 
+            idx = p->IfIndex; 
+            break; 
+        } 
+        p = p->Next; 
+    } 
+
+    free (addresses); 
+
+    return idx; 
+} 
+
+int WSASendMsg( 
+    __in SOCKET Handle, 
+    __in LPWSAMSG lpMsg, 
+    __in DWORD dwFlags, 
+    __out_opt LPDWORD lpNumberOfBytesSent, 
+    __inout_opt LPWSAOVERLAPPED lpOverlapped, 
+    __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine 
+) 
+{ 
+    char tmpbuf[65536]; 
+    uint32_t tmplen = 0; 
+    DWORD i = 0; 
+    int res = 0; 
+    if (lpMsg == NULL) 
+    { 
+        return 0; 
+    } 
+    if (lpOverlapped != NULL) 
+    { 
+        return 0; 
+    } 
+    if (lpCompletionRoutine != NULL) 
+    { 
+        return 0; 
+    } 
+    for (i = 0; i < lpMsg->dwBufferCount; i++) 
+    { 
+        WSABUF wsaBuf = lpMsg->lpBuffers[i]; 
+        if ((tmplen + wsaBuf.len) > sizeof(tmpbuf)) 
+        { 
+            return 0; 
+        } 
+        memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len); 
+        tmplen += wsaBuf.len; 
+    } 
+    res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen); 
+    if (res == SOCKET_ERROR) 
+    { 
+        return res; 
+    } 
+    if (lpNumberOfBytesSent != NULL) 
+    { 
+        *lpNumberOfBytesSent = res; 
+    } 
+    return 0; 
+} 
+#endif
+
 /*
  * Local variables:
  * tab-width: 4
@@ -2316,90 +2403,3 @@ PHP_FUNCTION(socket_import_stream)
  * vim600: fdm=marker
  * vim: noet sw=4 ts=4
  */
-
-#if (_WIN32_WINNT < 0x0600) 
-WINAPI if_nametoindex (__in PCSTR iface) 
-{ 
-	PIP_ADAPTER_ADDRESSES addresses = NULL, p; 
-	ulong addresses_len = 0; 
-	uint idx = 0; 
-	DWORD res; 
-
-	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, NULL, &addresses_len); 
-	if (res != NO_ERROR && res != ERROR_BUFFER_OVERFLOW) 
-	{ 
-		return 0; 
-	} 
-
-	addresses = malloc (addresses_len); 
-	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, addresses, &addresses_len); 
-
-	if (res != NO_ERROR) 
-	{ 
-		free (addresses); 
-		return 0; 
-	} 
-
-	p = addresses; 
-	while (p) 
-	{ 
-		if (strcmp (p->AdapterName, iface) == 0) 
-		{ 
-			idx = p->IfIndex; 
-			break; 
-		} 
-		p = p->Next; 
-	} 
-
-	free (addresses); 
-
-	return idx; 
-} 
-
-int WSASendMsg( 
-	__in SOCKET Handle, 
-	__in LPWSAMSG lpMsg, 
-	__in DWORD dwFlags, 
-	__out_opt LPDWORD lpNumberOfBytesSent, 
-	__inout_opt LPWSAOVERLAPPED lpOverlapped, 
-	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine 
-) 
-{ 
-	char tmpbuf[65536]; 
-	uint32_t tmplen = 0; 
-	DWORD i = 0; 
-	int res = 0; 
-	if (lpMsg == NULL) 
-	{ 
-		return 0; 
-	} 
-	if (lpOverlapped != NULL) 
-	{ 
-		return 0; 
-	} 
-	if (lpCompletionRoutine != NULL) 
-	{ 
-		return 0; 
-	} 
-	for (i = 0; i < lpMsg->dwBufferCount; i++) 
-	{ 
-		WSABUF wsaBuf = lpMsg->lpBuffers[i]; 
-		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf)) 
-		{ 
-			return 0; 
-		} 
-		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len); 
-		tmplen += wsaBuf.len; 
-	} 
-	res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen); 
-	if (res == SOCKET_ERROR) 
-	{ 
-		return res; 
-	} 
-	if (lpNumberOfBytesSent != NULL) 
-	{ 
-		*lpNumberOfBytesSent = res; 
-	} 
-	return 0; 
-} 
-#endif

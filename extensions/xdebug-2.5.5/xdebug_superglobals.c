@@ -21,7 +21,7 @@
 #include "xdebug_var.h"
 #include "xdebug_compat.h"
 #include "xdebug_superglobals.h"
-#include "SAPI.h"
+#include "main/SAPI.h"
 
 extern ZEND_DECLARE_MODULE_GLOBALS(xdebug);
 

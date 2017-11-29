@@ -24,7 +24,7 @@
 #endif
 
 #include "php.h"
-#include "SAPI.h"
+#include "main/SAPI.h"
 
 #include "ext/standard/php_string.h"
 #include "ext/standard/url.h"

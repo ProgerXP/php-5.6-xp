@@ -49,6 +49,55 @@
 
 ZEND_EXTERN_MODULE_GLOBALS(xdebug)
 
+typedef struct pollfd {
+  SOCKET fd;
+  short  events;
+  short  revents;
+} WSAPOLLFD, *PWSAPOLLFD, *LPWSAPOLLFD;
+
+#define POLLRDNORM  0x0100
+#define POLLRDBAND  0x0200
+#define POLLIN      (POLLRDNORM | POLLRDBAND)
+#define POLLPRI     0x0400
+
+#define POLLWRNORM  0x0010
+#define POLLOUT     (POLLWRNORM)
+#define POLLWRBAND  0x0020
+
+#define POLLERR     0x0001
+#define POLLHUP     0x0002
+#define POLLNVAL    0x0004
+
+#define WSAPoll(fd,nfd,t) poll(fd,nfd,t)
+
+// Copied from here:
+// http://www.slac.stanford.edu/accel/ilc/codes/ATF2/control-software/epics-3.14.10/support/asyn/asyn-4-11/asyn/drvAsynSerial/drvAsynIPPort.c
+/*
+ * Use select() to simulate enough of poll() to get by.
+ */
+
+static int poll(struct pollfd fds[], int nfds, int timeout)
+{
+    fd_set fdset;
+    struct timeval tv, *ptv;
+
+    // assert(nfds == 1);
+    FD_ZERO(&fdset);
+    FD_SET(fds[0].fd,&fdset);
+    if (timeout >= 0) {
+        tv.tv_sec = timeout / 1000;
+        tv.tv_usec = (timeout % 1000) * 1000;
+        ptv = &tv;
+    } else {
+        ptv = NULL;
+    }
+    return select(fds[0].fd + 1,
+        (fds[0].events & POLLIN) ? &fdset : NULL,
+        (fds[0].events & POLLOUT) ? &fdset : NULL,
+        NULL,
+        ptv);
+}
+
 int xdebug_create_socket(const char *hostname, int dport TSRMLS_DC)
 {
 	struct addrinfo            hints;

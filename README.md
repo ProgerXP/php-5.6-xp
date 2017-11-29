@@ -6,7 +6,7 @@ https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/1.8.1/
 
 To install:
 
-1. Overwrite the `php` folder of your XAMPP with the contents of the `php` folder from `php4xampp.zip`. 
+1. Overwrite the `php` folder of your XAMPP with the contents of the `php` folder from `downloads\php4xampp-x86-bin.zip`. 
 2. You may need to install Visual C++ 2012 redistributable. The archive includes x86 redist. x64 redist is available from microsoft.com.
 3. This build bundles all supported extensions except for `curl` and `fileinfo` so comment out all `extension=xxx` lines in `php\php.ini` except for these two.
 

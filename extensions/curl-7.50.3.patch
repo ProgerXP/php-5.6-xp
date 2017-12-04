@@ -1,0 +1,34 @@
+diff -r -u curl-7.50.3-origin\winbuild\MakefileBuild.vc curl-7.50.3\winbuild\MakefileBuild.vc
+--- curl-7.50.3-origin\winbuild\MakefileBuild.vc	Wed Sep 07 04:25:06 2016
++++ curl-7.50.3\winbuild\MakefileBuild.vc	Tue Dec 05 03:39:15 2017
+@@ -58,9 +58,11 @@
+ CC_DEBUG    = $(CC) /Od /Gm /Zi /D_DEBUG /GZ
+ CFLAGS     = /I. /I../lib /I../include /nologo /W3 /GX /DWIN32 /YX /FD /c /DBUILDING_LIBCURL
+ !ELSE
+-CC_NODEBUG  = $(CC) /O2 /DNDEBUG
++#CC_NODEBUG  = $(CC) /O2 /DNDEBUG
++CC_NODEBUG  = $(CC) /O2 /DNDEBUG /D_USING_V110_SDK71_
+ CC_DEBUG    = $(CC) /Od /D_DEBUG /RTC1 /Z7 /LDd /W3
+-CFLAGS      = /I. /I ../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c /DBUILDING_LIBCURL
++#CFLAGS      = /I. /I ../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c /DBUILDING_LIBCURL
++CFLAGS 	     = /I. /I ../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c /DBUILDING_LIBCURL /D_USING_V110_SDK71_
+ !ENDIF
+ 
+ LFLAGS     = /nologo /machine:$(MACHINE)
+@@ -93,8 +95,14 @@
+ 
+ # CURL Command section
+ PROGRAM_NAME = curl.exe
+-CURL_CFLAGS   =  /I../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c
+-CURL_LFLAGS   = /nologo /out:$(DIRDIST)\bin\$(PROGRAM_NAME) /subsystem:console /machine:$(MACHINE)
++#CURL_CFLAGS   =  /I../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c
++CURL_CFLAGS   = /I../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c /D_USING_V110_SDK71_
++#CURL_LFLAGS   = /nologo /out:$(DIRDIST)\bin\$(PROGRAM_NAME) /subsystem:console /machine:$(MACHINE)
++!IF "$(MACHINE)"=="x64"
++CURL_LFLAGS = /nologo /out:$(DIRDIST)\bin\$(PROGRAM_NAME) /SUBSYSTEM:CONSOLE,5.02 /machine:$(MACHINE)
++!ELSE
++CURL_LFLAGS = /nologo /out:$(DIRDIST)\bin\$(PROGRAM_NAME) /SUBSYSTEM:CONSOLE,5.01 /machine:$(MACHINE)
++!ENDIF
+ CURL_RESFLAGS = /i../include
+ 
+ #############################################################

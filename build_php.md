@@ -22,7 +22,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=30679
 ## Setup
 Install Visual Studio 2012 with at least SP1.
 
-##Command prompt
+## Command prompt
 Open the “VS2012 xXX Native Tools Command Prompt”
 
 
@@ -42,18 +42,17 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 3. Open the command prompt and enter the build directory:
 <blockquote>cd c:\php-sdk\ </blockquote>
 4. Run the buildtree batch script which will create the desired directory structure:
-<blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>
-5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11
-6. Extract dependency libraries to build PHP:
-    * deps-5.6-vc11-xXX.7z *to* C:\php-sdk\phpdev\vc11\xXX\
-7. Download BAT files to C:\php-sdk\phpdev\vc11\xXX\:
-    * *For x86*:
-[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x86/buildphp.bat)
-[xpinitx86.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x86/xpinitx86.bat)	
-    * *For x64*:
-[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x64/buildphp.bat)
-[xpinitx64.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x64/xpinitx64.bat)
-
+<blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>  
+5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11<br/>
+6. Extract dependency libraries to build PHP:<br/>
+    * deps-5.6-vc11-xXX.7z *to* C:\php-sdk\phpdev\vc11\xXX\<br/>
+7. Download BAT files to C:\php-sdk\phpdev\vc11\xXX\:<br/>
+    * *For x86*:<br/>
+[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x86/buildphp.bat)<br/>
+[xpinitx86.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x86/xpinitx86.bat)<br/>
+    * *For x64*:<br/>
+[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x64/buildphp.bat)<br/>
+[xpinitx64.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x64/xpinitx64.bat)<br/>
 
 Apply patch or make source code adjustments:
 
@@ -317,9 +316,9 @@ After each tq_timer assignment add next lines:
 #ifdef TLS_TQ_TIMER<br />
 			tls_set(&tls_tq_timer, tq_timer);<br />
 #endif
-</blockquote>
+</blockquote><br/>
 					
-#Build extensions
+# Build extensions
 
 1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)  
     * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\bin\curl.exe  
@@ -337,6 +336,6 @@ After each tq_timer assignment add next lines:
 <blockquote>cd c:\php-sdk\phpdev\vc11\xXX </blockquote>
 2. Run buildphp.bat:  
 <blockquote>buildphp</blockquote>  
-2. Destination folder for binaries:  
-    * *For x86*: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS  
-    * *For x64*: C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS  
+2. Destination folder for binaries:<br/>
+    * *For x86*: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS<br/>
+    * *For x64*: C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS<br/>

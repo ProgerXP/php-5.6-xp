@@ -21,13 +21,13 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 # Setup the build directory
 * Unpack the CURL sources archive into directory c:\php-sdk\extensions\
 
-Apply patch or make source code adjustments:
+# Apply patch or make source code adjustments
 
-# Apply patch
+## Apply patch
 1. Download CURL patch [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/raw/master/extensions/curl-7.50.3.patch).
 2. [Apply patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/apply_patch.md).
 
-# Manual source code adjustments
+## Manual source code adjustments
 Set up nmake using v110_xp toolset in file C:\php-sdk\phpdev\extensions\curl-7.50.3\winbuild\MakefileBuild.vc:  
     * Add D_USING_V110_SDK71_ directive:
       <blockquote>CC_NODEBUG  = cl.exe /O2 /DNDEBUG /D_USING_V110_SDK71_</blockquote>

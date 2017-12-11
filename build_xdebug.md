@@ -20,7 +20,7 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 # Setup the build directory
 * Unpack XDebug sources archive into directory c:\php-sdk\extensions\
 
-#Apply patch or make source code adjustments:
+# Apply patch or make source code adjustments
 
 ## Apply patch
 1. Download XDebug patch [xdebug-2.5.5.patch](https://github.com/ProgerXP/php-5.6-xp/raw/master/extensions/xdebug-2.5.5.patch).

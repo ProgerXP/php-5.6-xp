@@ -54,7 +54,7 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 [buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x64/buildphp.bat)<br/>
 [xpinitx64.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x64/xpinitx64.bat)<br/>
 
-#Apply patch or make source code adjustments:
+# Apply patch or make source code adjustments
 
 ## Apply patch
 1. Download PHP patch [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/noarch/php-5.6.24.patch).

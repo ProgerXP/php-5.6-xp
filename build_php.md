@@ -48,19 +48,19 @@ Open the “VS2012 xXX Native Tools Command Prompt”
     * deps-5.6-vc11-xXX.7z *to* C:\php-sdk\phpdev\vc11\xXX\<br/>
 7. Download BAT files to C:\php-sdk\phpdev\vc11\xXX\:<br/>
     * *For x86*:<br/>
-[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x86/buildphp.bat)<br/>
-[xpinitx86.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x86/xpinitx86.bat)<br/>
+[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x86/buildphp.bat)<br/>
+[xpinitx86.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x86/xpinitx86.bat)<br/>
     * *For x64*:<br/>
-[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x64/buildphp.bat)<br/>
-[xpinitx64.bat](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/x64/xpinitx64.bat)<br/>
+[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x64/buildphp.bat)<br/>
+[xpinitx64.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x64/xpinitx64.bat)<br/>
 
-Apply patch or make source code adjustments:
+#Apply patch or make source code adjustments:
 
-# Apply patch
-1. Download PHP patch [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/phpdev/vc11/noarch/php-5.6.24.patch).
+## Apply patch
+1. Download PHP patch [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/noarch/php-5.6.24.patch).
 2. [Apply patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/apply_patch.md).
 
-# Manual source code adjustments
+## Manual source code adjustments
 
 1. Set up nmake using v110_xp toolset:
     * Add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:

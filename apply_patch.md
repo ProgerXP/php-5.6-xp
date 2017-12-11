@@ -5,7 +5,7 @@ Patch utility from UnxUtils (https://sourceforge.net/projects/unxutils).
 
 ## Download utility
 * Get [patch.exe](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/patch.exe)
-* Or download [UnxUtils](https://sourceforge.net/projects/unxutils) and unpack patch.exe to destination folder
+* Or download [UnxUtils](https://sourceforge.net/projects/unxutils) and unpack patch.exe to the destination folder
 
 # Command line
 1. Open the command prompt and switch to working directory:

@@ -24,7 +24,7 @@ Open the “VS2012 xXX Native Tools Command Prompt”
 Apply patch or make source code adjustments:
 
 # Apply patch
-1. Download CURL patch [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/extensions/curl-7.50.3.patch).
+1. Download CURL patch [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/raw/master/extensions/curl-7.50.3.patch).
 2. [Apply patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/apply_patch.md).
 
 # Manual source code adjustments

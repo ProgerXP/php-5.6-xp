@@ -269,7 +269,7 @@ int WSASendMsg(
 ```
 
 #### tls_var.c/h
-1. Copy supplied `tls_var.c` and `tls_var.h` from `phpdev\vc11\noarch\php-5.6.24-src_\main` to `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main`
+1. Copy supplied `tls_var.c` and `tls_var.h` from `phpdev\vc11\noarch\php-5.6.24-src\main` to `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main`
 2. Modify file `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32`:
 ```
 # old:

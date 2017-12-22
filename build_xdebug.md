@@ -1,93 +1,98 @@
-# Build XDebug extension for Windows XP
+# Building XDebug extension for Windows XP
 
-# Compiler
+## Set up compiler
 
-## Requirements
+### Requirements
+To compile:
+* Visual C++ 11.0 (Visual Studio 2012 **SP1+**)
 
-Visual C++ 11.0 (Visual Studio 2012 <b>SP1+</b>).
-
-
-## Setup
+### Set up
 Install Visual Studio 2012 with at least SP1.
 
-##Command prompt
-Open the “VS2012 xXX Native Tools Command Prompt”
+### Command prompt
+Open the *VS2012 xXX Native Tools Command Prompt*.
 
+## Download prerequisites/sources
+* Get XDebug sources: `xdebug-2.5.5.tgz`
 
-# Download prerequisites/sources
-* Get the XDebug sources [xdebug-2.5.5.tgz](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/xdebug-2.5.5.tgz)
+## Set up the build directory
+Unpack XDebug sources archive into directory: `c:\php-sdk\extensions\`
 
-# Setup the build directory
-* Unpack XDebug sources archive into directory c:\php-sdk\extensions\
+## Patch source code
+Now XDebug sources need to be patched to support Windows XP. You can either apply a provided patch file or go over all changes manually.
 
-# Apply patch or make source code adjustments
+### Option 1: apply patch
+1. Get XDebug patch: `extensions\xdebug-2.5.5.patch`
+2. Get `patch.exe` utility from `downloads\` or from [UnxUtils](https://sourceforge.net/projects/unxutils)
+3. Open the command prompt and switch to working directory: `cd c:\php-sdk\xdebug`
+4. Apply the patch: `patch.exe -p0 -u <xdebug-2.5.5.patch`
 
-## Apply patch
-1. Download XDebug patch [xdebug-2.5.5.patch](https://github.com/ProgerXP/php-5.6-xp/raw/master/extensions/xdebug-2.5.5.patch).
-2. [Apply patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/apply_patch.md).
-
-## Manual source code adjustments
+### Option 2: manual patching
 
 1. Replace includes in .c files:
-<blockquote>#include "SAPI.h"</blockquote>
-with
-<blockquote>`#include "main/SAPI.h"`</blockquote>
+```
+# old:
+#include "SAPI.h"
+# new:
+#include "main/SAPI.h"
+```
 
 2. Add code to `xdebug_com.c` before `xdebug_create_socket()`:
-<blockquote>
-typedef struct pollfd {<br/>
-  SOCKET fd;<br/>
-  short  events;<br/>
-  short  revents;<br/>
-} WSAPOLLFD, *PWSAPOLLFD, *LPWSAPOLLFD;<br/>
-<br/>
-#define POLLRDNORM  0x0100<br/>
-#define POLLRDBAND  0x0200<br/>
-#define POLLIN      (POLLRDNORM | POLLRDBAND)<br/>
-#define POLLPRI     0x0400<br/>
-<br/>
-#define POLLWRNORM  0x0010<br/>
-#define POLLOUT     (POLLWRNORM)<br/>
-#define POLLWRBAND  0x0020<br/>
-<br/>
-#define POLLERR     0x0001<br/>
-#define POLLHUP     0x0002<br/>
-#define POLLNVAL    0x0004<br/>
-<br/>
-#define WSAPoll(fd,nfd,t) poll(fd,nfd,t)<br/>
-<br/>
-// Original source:<br/>
-// http://www.slac.stanford.edu/accel/ilc/codes/ATF2/control-software/epics-3.14.10/support/asyn/asyn-4-11/asyn/drvAsynSerial/drvAsynIPPort.c<br/>
-/*<br/>
- * Use select() to simulate enough of poll() to get by.<br/>
- */<br/>
-<br/>
-static int poll(struct pollfd fds[], int nfds, int timeout)<br/>
-{<br/>
-    fd_set fdset;<br/>
-    struct timeval tv, *ptv;<br/>
-<br/>
-    // assert(nfds == 1);<br/>
-    FD_ZERO(&fdset);<br/>
-    FD_SET(fds[0].fd,&fdset);<br/>
-    if (timeout >= 0) {<br/>
-        tv.tv_sec = timeout / 1000;<br/>
-        tv.tv_usec = (timeout % 1000) * 1000;<br/>
-        ptv = &tv;<br/>
-    } else {<br/>
-        ptv = NULL;<br/>
-    }<br/>
-    return select(fds[0].fd + 1,<br/>
-        (fds[0].events & POLLIN) ? &fdset : NULL,<br/>
-        (fds[0].events & POLLOUT) ? &fdset : NULL,<br/>
-        NULL,<br/>
-        ptv);<br/>
-}<br/>
-</blockquote>
+```
+typedef struct pollfd {
+  SOCKET fd;
+  short  events;
+  short  revents;
+} WSAPOLLFD, *PWSAPOLLFD, *LPWSAPOLLFD;
 
-# Compile
-1. [Build PHP](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_php.md)
-2. Open the command prompt and switch to the build directory:  
-<blockquote>cd c:\php-sdk\extensions</blockquote>  
-3. Run buildxdebug.bat:  
-<blockquote>buildxdebug</blockquote>  
+#define POLLRDNORM  0x0100
+#define POLLRDBAND  0x0200
+#define POLLIN      (POLLRDNORM | POLLRDBAND)
+#define POLLPRI     0x0400
+
+#define POLLWRNORM  0x0010
+#define POLLOUT     (POLLWRNORM)
+#define POLLWRBAND  0x0020
+
+#define POLLERR     0x0001
+#define POLLHUP     0x0002
+#define POLLNVAL    0x0004
+
+#define WSAPoll(fd,nfd,t) poll(fd,nfd,t)
+
+// Original source:
+// http://www.slac.stanford.edu/accel/ilc/codes/ATF2/control-software/epics-3.14.10/support/asyn/asyn-4-11/asyn/drvAsynSerial/drvAsynIPPort.c
+/*
+ * Use select() to simulate enough of poll() to get by.
+ */
+
+static int poll(struct pollfd fds[], int nfds, int timeout)
+{
+    fd_set fdset;
+    struct timeval tv, *ptv;
+
+    // assert(nfds == 1);
+    FD_ZERO(&fdset);
+    FD_SET(fds[0].fd,&fdset);
+    if (timeout >= 0) {
+        tv.tv_sec = timeout / 1000;
+        tv.tv_usec = (timeout % 1000) * 1000;
+        ptv = &tv;
+    } else {
+        ptv = NULL;
+    }
+    return select(fds[0].fd + 1,
+        (fds[0].events & POLLIN) ? &fdset : NULL,
+        (fds[0].events & POLLOUT) ? &fdset : NULL,
+        NULL,
+        ptv);
+}
+```
+
+## Compile
+1. Build PHP as described in [build_php.md](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_php.md)
+2. Open the command prompt and switch to the build directory:
+```
+cd c:\php-sdk\extensions
+```
+3. Run: `buildxdebug.bat`

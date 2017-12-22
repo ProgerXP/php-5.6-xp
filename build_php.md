@@ -1,341 +1,368 @@
-Original instructions for building PHP for Windows:  
-https://wiki.php.net/internals/windows/stepbystepbuild  
-  
-# Build PHP for Windows XP
+# Building PHP 5.6 for Windows XP
+1. In this text, **xXX** means **x86** or **x64** depending on the required PHP version
+2. Dependencies (sources and binaries) can be obtained from the `download\` directory or from the Internet (see `download\README`)
+3. Official instructions for building PHP for Windows are here:
+https://wiki.php.net/internals/windows/stepbystepbuild
 
-*In the following paragraphs xXX means x86 or x64 depending on the required PHP version.*  
+## I. Set up compiler
 
-# Compiler
+### Requirements
+To compile:
+* Visual C++ 11.0 (Visual Studio 2012 **SP1+**) for PHP 5.6
 
-## Requirements
+To run PHP on Windows XP:
+* **x86** runtime: `vcredist_x86.exe`
+* **x64** runtime: `vcredist_x64.exe`
 
-Visual C++ 11.0 (Visual Studio 2012 <b>SP1+</b>) for PHP 5.6.
-
-Launching PHP in Windows XP requires corresponding runtime components installed.  
-*For x86*: [vcredist_x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredist_x86.exe)  
-*For x64*: [vcredist_x64](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/vcredist_x64.exe)  
-  
-Note: required Visual C++ Redistributables for Visual Studio 2012 Update 4 were downloaded from here:
-https://www.microsoft.com/en-us/download/details.aspx?id=30679
-
-
-## Setup
+### Set up
 Install Visual Studio 2012 with at least SP1.
 
-## Command prompt
-Open the “VS2012 xXX Native Tools Command Prompt”
+### Command prompt
+Open the *VS2012 xXX Native Tools Command Prompt*.
 
+## II. Download prerequisites/sources
+1. Get new PHP sources: `php-5.6.24-src.zip`
+2. Get old PHP sources: `php-5.4.9-src.zip`
+3. Get PHP binary tools: `php-sdk-binary-tools-20110915.zip`
+4. Get libraries on which PHP depends:
+    * Dependency archive for **x86**: `deps-5.6-vc11-x86.7z`
+    * Dependency archive for **x64**: `deps-5.6-vc11-x64.7z`
 
-# Download prerequisites/sources
-1. Get the PHP sources [php-5.6.24-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.6.24-src.zip)
-2. Get the PHP sources [php-5.4.9-src.zip](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-5.4.9-src.zip)
-3. Get the PHP [binary tools](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/php-sdk-binary-tools-20110915.zip)
-4. Get the libraries on which PHP depends:
-    * [dependency archive for x86](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/deps-5.6-vc11-x86.7z)
-    * [dependency archive for x64](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/deps-5.6-vc11-x64.7z)
+## III. Set up the build directory
 
+1. Create build directory: `C:\php-sdk`
+2. Unpack binary tools archive into this directory. It should contain three sub-directories: `bin`, `script` and `share`
+3. Open command prompt and enter the build directory: `cd c:\php-sdk\`
+4. Run the buildtree batch script which will create the desired directory structure: `bin\phpsdk_buildtree.bat phpdev`
+5. Copy `C:\php-sdk\phpdev\vc9` to `C:\php-sdk\phpdev\vc11`
+6. Extract dependency libraries for building PHP:
+    * Extract `deps-5.6-vc11-xXX.7z` into `C:\php-sdk\phpdev\vc11\xXX\`
+7. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:
+```
+# for x86:
+phpdev\vc11\x86\buildphp.bat
+phpdev\vc11\x86\xpinitx86.bat
 
-# Setup the build directory
+# for x64:
+phpdev\vc11\x64\buildphp.bat
+phpdev\vc11\x64\xpinitx64.bat
+```
 
-1. Create the build directory C:\php-sdk
-2. Unpack the binary tools archive into this directory, it should contain three sub-directories: bin, script and share
-3. Open the command prompt and enter the build directory:
-<blockquote>cd c:\php-sdk\ </blockquote>
-4. Run the buildtree batch script which will create the desired directory structure:
-<blockquote>bin\phpsdk_buildtree.bat phpdev</blockquote>  
-5. Copy C:\php-sdk\phpdev\vc9 to C:\php-sdk\phpdev\vc11<br/>
-6. Extract dependency libraries to build PHP:<br/>
-    * deps-5.6-vc11-xXX.7z *to* C:\php-sdk\phpdev\vc11\xXX\<br/>
-7. Download BAT files to C:\php-sdk\phpdev\vc11\xXX\:<br/>
-    * *For x86*:<br/>
-[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x86/buildphp.bat)<br/>
-[xpinitx86.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x86/xpinitx86.bat)<br/>
-    * *For x64*:<br/>
-[buildphp.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x64/buildphp.bat)<br/>
-[xpinitx64.bat](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/x64/xpinitx64.bat)<br/>
+## IV. Patch source code
 
-# Apply patch or make source code adjustments
+Now PHP sources need to be patched to support Windows XP. You can either apply a provided patch file (easy way) or go over all changes manually (long way).
 
-## Apply patch
-1. Download PHP patch [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/raw/master/phpdev/vc11/noarch/php-5.6.24.patch).
-2. [Apply patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/apply_patch.md).
+### Option 1: apply patch
+1. Get PHP patch: `phpdev\vc11\noarch\php-5.6.24.patch`
+2. Get `patch.exe` utility from `downloads\` or from [UnxUtils](https://sourceforge.net/projects/unxutils)
+3. Open the command prompt and switch to working directory: `cd c:\php-sdk\vc11\xXX`
+4. Apply the patch: `patch.exe -p0 -u <php-5.6.24.patch`
 
-## Manual source code adjustments
+### Option 2: manual patching
 
-1. Set up nmake using v110_xp toolset:
-    * Add "/D_USING_V110_SDK71_" directive for CFLAGS_PHP to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:
-      <blockquote>`DEFINE("CFLAGS_PHP", "/D_USING_V110_SDK71_ /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \`</blockquote>
-    * *For x86*: add "/SUBSYSTEM:CONSOLE,5.01" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32:
-      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>
-    * *For x64*: add "/SUBSYSTEM:CONSOLE,5.02" directive for LDFLAGS in C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\win32\build\config.w32:
-      <blockquote>`ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.02 /libpath:"' + php_usual_lib_suspects + '" ');`</blockquote>
-2. Change target Windows version in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32.h.in:  
-    `#define _WIN32_WINNT _WIN32_WINNT_WINXP`  
-    `#define NTDDI_VERSION  NTDDI_WINXP`  
-3. Rollback changes in C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\select.c:
-    * `ULONGLONG ms_total, limit;`  
-      *change to:*  
-      `DWORD ms_total, limit;`  
-    * `limit = GetTickCount64() + ms_total;`  
-      *change to:*  
-      `limit = GetTickCount() + ms_total;`  
-    * `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount64() < limit));`  
-      *change to:*  
-      `} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));`  
-4. Extract files win32\inet.h, win32\inet.c from PHP sources (5.4.9) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\ (overwrite existing files).  
-5. Remove next lines from C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\standard\info.c:  
-<blockquote>
-/*				case PRODUCT_ENTERPRISE_EVALUATION:  <br />
-					sub = "Enterprise Edition (evaluation installation)";  <br />
-					break;  <br />
-				case PRODUCT_MULTIPOINT_STANDARD_SERVER:  <br />
-					sub = "MultiPoint Server Standard Edition (full installation)";  <br />
-					break;  <br />
-				case PRODUCT_MULTIPOINT_PREMIUM_SERVER:  <br />
-					sub = "MultiPoint Server Premium Edition (full installation)";  <br />
-					break;  <br />
-				case PRODUCT_STANDARD_EVALUATION_SERVER:  <br />
-					sub = "Standard Edition (evaluation installation)";  <br />
-					break;  <br />
-				case PRODUCT_DATACENTER_EVALUATION_SERVER:  <br />
-					sub = "Datacenter Edition (evaluation installation)";  <br />
-					break;  <br />
-				case PRODUCT_ENTERPRISE_N_EVALUATION:  <br />
-					sub = "Enterprise N Edition (evaluation installation)";  <br />
-					break;  <br />
-				case PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER:  <br />
-					sub = "Storage Server Workgroup Edition (evaluation installation)";  <br />
-					break;  <br />
-				case PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER:  <br />
-					sub = "Storage Server Standard Edition (evaluation installation)";  <br />
-					break;  <br />
-				case PRODUCT_CORE_N:  <br />
-					sub = "Windows 8 N Edition";  <br />
-					break;  <br />
-				case PRODUCT_CORE_COUNTRYSPECIFIC:  <br />
-					sub = "Windows 8 China Edition";  <br />
-					break;  <br />
-				case PRODUCT_CORE_SINGLELANGUAGE:  <br />
-					sub = "Windows 8 Single Language Edition";  <br />
-					break;  <br />
-				case PRODUCT_CORE:  <br />
-					sub = "Windows 8 Edition";  <br />
-					break;  <br />
-				case PRODUCT_PROFESSIONAL_WMC:  <br />
-					sub = "Professional with Media Center Edition";  <br />
-					break;*/</blockquote>
-					
-6. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h:  
-<blockquote>
-#if (_WIN32_WINNT &lt; 0x0600)<br />
-#define CMSG_SPACE WSA_CMSG_SPACE<br />
-#define CMSG_LEN WSA_CMSG_LEN<br />
-#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR<br />
-#define CMSG_NXTHDR WSA_CMSG_NXTHDR<br />
-<br />
-WINAPI if_nametoindex (__in PCSTR iface);<br />
-<br />
-int WSASendMsg(  <br />
-        __in SOCKET Handle,<br />
-        __in LPWSAMSG lpMsg,<br />
-        __in DWORD dwFlags,<br />
-        __out_opt LPDWORD lpNumberOfBytesSent,<br />
-        __inout_opt LPWSAOVERLAPPED lpOverlapped,<br />
-        __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine<br />
-    );  
-\#endif //_WIN32_WINNT &lt; 0x0600</blockquote>
+#### nmake
+Set up nmake using v110_xp toolset:
+1. Add `/D_USING_V110_SDK71_` directive to CFLAGS_PHP in `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32`:
+```
+DEFINE("CFLAGS_PHP", "/D_USING_V110_SDK71_ /D _USRDLL /D PHP5DLLTS_EXPORTS /D PHP_EXPORTS \
+```
+2. For **x86**: add `/SUBSYSTEM:CONSOLE,5.01` directive to LDFLAGS in `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\win32\build\config.w32`:
+```
+ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.01 /libpath:"' + php_usual_lib_suspects + '" ');
+```
+3. For **x64**: add `/SUBSYSTEM:CONSOLE,5.02` directive to LDFLAGS in `C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\win32\build\config.w32`:
+```
+ADD_FLAG("LDFLAGS", '/SUBSYSTEM:CONSOLE,5.02 /libpath:"' + php_usual_lib_suspects + '" ');
+```
 
-7. Add code to C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c:
-<blockquote>
-#if (_WIN32_WINNT &lt; 0x0600)  <br />
-WINAPI if_nametoindex (__in PCSTR iface)  <br />
-{  <br />
-	PIP_ADAPTER_ADDRESSES addresses = NULL, p;  <br />
-	ulong addresses_len = 0;  <br />
-	uint idx = 0;  <br />
-	DWORD res;  <br />
-  <br />
-	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, NULL, &addresses_len);  <br />
-	if (res != NO_ERROR && res != ERROR_BUFFER_OVERFLOW)  <br />
-	{  <br />
-		return 0;  <br />
-	}  <br />
-<br />
-	addresses = malloc (addresses_len);  <br />
-	res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, addresses, &addresses_len);  <br />
-  <br />
-	if (res != NO_ERROR)  <br />
-	{  <br />
-		free (addresses);  <br />
-		return 0;  <br />
-	}  <br />
-  <br />
-	p = addresses;  <br />
-	while (p)  <br />
-	{  <br />
-		if (strcmp (p->AdapterName, iface) == 0)  <br />
-		{  <br />
-			idx = p->IfIndex;  <br />
-			break;  <br />
-		}  <br />
-		p = p->Next;  <br />
-	}  <br />
-  <br />
-	free (addresses);  <br />
-  <br />
-	return idx;  <br />
-}  <br />
-<br />
-int WSASendMsg(  <br />
-	__in SOCKET Handle,  <br />
-	__in LPWSAMSG lpMsg,  <br />
-	__in DWORD dwFlags,  <br />
-	__out_opt LPDWORD lpNumberOfBytesSent,  <br />
-	__inout_opt LPWSAOVERLAPPED lpOverlapped,  <br />
-	__in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine  <br />
-	)  <br />
-{  <br />
-	char tmpbuf[65536];  <br />
-	uint32_t tmplen = 0;  <br />
-	DWORD i = 0;  <br />
-	int res = 0;  <br />
-	if (lpMsg == NULL)  <br />
-	{  <br />
-		return 0;  <br />
-	}  <br />
-	if (lpOverlapped != NULL)  <br />
-	{  <br />
-		return 0;  <br />
-	}  <br />
-	if (lpCompletionRoutine != NULL)  <br />
-	{  <br />
-		return 0;  <br />
-	}  <br />
-	for (i = 0; i < lpMsg->dwBufferCount; i++)  <br />
-	{  <br />
-		WSABUF wsaBuf = lpMsg->lpBuffers[i];  <br />
-		if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))  <br />
-		{  <br />
-			return 0;  <br />
-		}  <br />
-		memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);  <br />
-		tmplen += wsaBuf.len;  <br />
-	}  <br />
-	res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);  <br />
-	if (res == SOCKET_ERROR)  <br />
-	{  <br />
-		return res;  <br />
-	}  <br />
-	if (lpNumberOfBytesSent != NULL)  <br />
-	{  <br />
-		*lpNumberOfBytesSent = res;  <br />
-	}  <br />
-	return 0;  <br />
-}  <br />
-#endif</blockquote>
+#### Change target version
+Change target Windows version in `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32.h.in`:
+```
+#define _WIN32_WINNT _WIN32_WINNT_WINXP
+#define NTDDI_VERSION  NTDDI_WINXP
+```
 
-8. Download files [tls_var.c](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/tls_var.c)/[tls_var.h](https://github.com/ProgerXP/php-5.6-xp/raw/master/downloads/tls_var.h) to C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main
+#### select.c
+Rollback changes in `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\select.c`:
 
-9. Modify file C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32:<br />
-	`php_open_temporary_file.c output.c internal_functions.c php_sprintf.c");`  
-      	*change to:*  
-	`php_open_temporary_file.c tls_var.c output.c internal_functions.c php_sprintf.c");`
+1.
+```
+# old:
+ULONGLONG ms_total, limit;
+# new:
+DWORD ms_total, limit;
+```
+2.
+```
+# old:
+limit = GetTickCount64() + ms_total;
+# new:
+limit = GetTickCount() + ms_total;
+```
+3.
+```
+# old:
+} while (retcode == 0 && (ms_total == INFINITE || GetTickCount64() < limit));
+# new:
+} while (retcode == 0 && (ms_total == INFINITE || GetTickCount() < limit));
+```
 
+#### inet.c/h
+Extract files `win32\inet.h` and `win32\inet.c` from old PHP sources (5.4.9) to `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\` (overwrite existing files).
 
-10. Change file C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c:<br />
-Add lines to the top of file:<br />
-<blockquote><br />
-#if defined(ZTS) && defined(PHP_WIN32)<br />
-#include "tls_var.h"<br />
-#endif<br />
-</blockquote>
-<br />
-Replace code block:
-<blockquote><br />
-__declspec(thread)<br />
-</blockquote>
-with:
-<blockquote>
-#define TLS_TEMPORARY_DIRECTORY<br />
-TLSVar tls_temporary_directory = {0};<br />
-</blockquote>
-<br />
-Add code at start of php_shutdown_temporary_directory():
-<blockquote>
-#ifdef TLS_TEMPORARY_DIRECTORY<br />
-	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
-#endif<br />
-</blockquote>
+#### info.c
+Remove next lines from `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\standard\info.c`:
+```
+case PRODUCT_ENTERPRISE_EVALUATION:
+  sub = "Enterprise Edition (evaluation installation)";
+  break;
+case PRODUCT_MULTIPOINT_STANDARD_SERVER:
+  sub = "MultiPoint Server Standard Edition (full installation)";
+  break;
+case PRODUCT_MULTIPOINT_PREMIUM_SERVER:
+  sub = "MultiPoint Server Premium Edition (full installation)";
+  break;
+case PRODUCT_STANDARD_EVALUATION_SERVER:
+  sub = "Standard Edition (evaluation installation)";
+  break;
+case PRODUCT_DATACENTER_EVALUATION_SERVER:
+  sub = "Datacenter Edition (evaluation installation)";
+  break;
+case PRODUCT_ENTERPRISE_N_EVALUATION:
+  sub = "Enterprise N Edition (evaluation installation)";
+  break;
+case PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER:
+  sub = "Storage Server Workgroup Edition (evaluation installation)";
+  break;
+case PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER:
+  sub = "Storage Server Standard Edition (evaluation installation)";
+  break;
+case PRODUCT_CORE_N:
+  sub = "Windows 8 N Edition";
+  break;
+case PRODUCT_CORE_COUNTRYSPECIFIC:
+  sub = "Windows 8 China Edition";
+  break;
+case PRODUCT_CORE_SINGLELANGUAGE:
+  sub = "Windows 8 Single Language Edition";
+  break;
+case PRODUCT_CORE:
+  sub = "Windows 8 Edition";
+  break;
+case PRODUCT_PROFESSIONAL_WMC:
+  sub = "Professional with Media Center Edition";
+  break;
+```
 
-Add code at start of php_get_temporary_directory():<br />
-<blockquote>
-#ifdef TLS_TEMPORARY_DIRECTORY<br />
-	tls_init(&temporary_directory);<br />
-	temporary_directory = (char*)tls_get(&tls_temporary_directory);<br />
-#endif<br />
-</blockquote>
-<br />
-Before each line:
-<blockquote>
-  return temporary_directory;<br />
-</blockquote>
-Insert next code:
-<blockquote>
-#ifdef TLS_TEMPORARY_DIRECTORY<br />
-  tls_set(&tls_temporary_directory, temporary_directory);<br />
-#endif<br />
-</blockquote>
+#### php_sockets.h
+Add code to `C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h`:
 
-11. Change file C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c:<br />
-Add lines to the top of file:<br />
-<blockquote><br />
-#if defined(ZTS) && defined(PHP_WIN32)<br />
-#include "../main/tls_var.h"<br />
-#endif<br />
-</blockquote>
-<br />
-Replace code block:
-<blockquote><br />
-__declspec(thread)<br />
-</blockquote>
-with:
-<blockquote>
+1.
+```
+#if (_WIN32_WINNT < 0x0600)
+#define CMSG_SPACE WSA_CMSG_SPACE
+#define CMSG_LEN WSA_CMSG_LEN
+#define CMSG_FIRSTHDR WSA_CMSG_FIRSTHDR
+#define CMSG_NXTHDR WSA_CMSG_NXTHDR
+
+WINAPI if_nametoindex (__in PCSTR iface);
+
+int WSASendMsg(
+        __in SOCKET Handle,
+        __in LPWSAMSG lpMsg,
+        __in DWORD dwFlags,
+        __out_opt LPDWORD lpNumberOfBytesSent,
+        __inout_opt LPWSAOVERLAPPED lpOverlapped,
+        __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+    );
+\#endif //_WIN32_WINNT < 0x0600
+```
+
+2.
+```
+#if (_WIN32_WINNT < 0x0600)
+WINAPI if_nametoindex (__in PCSTR iface)
+{
+    PIP_ADAPTER_ADDRESSES addresses = NULL, p;
+    ulong addresses_len = 0;
+    uint idx = 0;
+    DWORD res;
+
+    res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, NULL, &addresses_len);
+    if (res != NO_ERROR && res != ERROR_BUFFER_OVERFLOW)
+    {
+        return 0;
+    }
+
+    addresses = malloc (addresses_len);
+    res = GetAdaptersAddresses (AF_UNSPEC, 0, NULL, addresses, &addresses_len);
+
+    if (res != NO_ERROR)
+    {
+        free (addresses);
+        return 0;
+    }
+
+    p = addresses;
+    while (p)
+    {
+        if (strcmp (p->AdapterName, iface) == 0)
+        {
+            idx = p->IfIndex;
+            break;
+        }
+        p = p->Next;
+    }
+
+    free (addresses);
+
+    return idx;
+}
+
+int WSASendMsg(
+    __in SOCKET Handle,
+    __in LPWSAMSG lpMsg,
+    __in DWORD dwFlags,
+    __out_opt LPDWORD lpNumberOfBytesSent,
+    __inout_opt LPWSAOVERLAPPED lpOverlapped,
+    __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+    )
+{
+    char tmpbuf[65536];
+    uint32_t tmplen = 0;
+    DWORD i = 0;
+    int res = 0;
+    if (lpMsg == NULL)
+    {
+        return 0;
+    }
+    if (lpOverlapped != NULL)
+    {
+        return 0;
+    }
+    if (lpCompletionRoutine != NULL)
+    {
+        return 0;
+    }
+    for (i = 0; i dwBufferCount; i++)
+    {
+        WSABUF wsaBuf = lpMsg->lpBuffers[i];
+        if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))
+        {
+            return 0;
+        }
+        memcpy(tmpbuf + tmplen, wsaBuf.buf, wsaBuf.len);
+        tmplen += wsaBuf.len;
+    }
+    res = sendto(Handle, tmpbuf, tmplen, dwFlags, lpMsg->name, lpMsg->namelen);
+    if (res == SOCKET_ERROR)
+    {
+        return res;
+    }
+    if (lpNumberOfBytesSent != NULL)
+    {
+        *lpNumberOfBytesSent = res;
+    }
+    return 0;
+}
+#endif
+```
+
+#### tls_var.c/h
+1. Copy supplied `tls_var.c` and `tls_var.h` from `phpdev\vc11\noarch\php-5.6.24-src_\main` to `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main`
+2. Modify file `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\win32\build\config.w32`:
+```
+# old:
+    php_open_temporary_file.c output.c internal_functions.c php_sprintf.c");
+# new:
+    php_open_temporary_file.c tls_var.c output.c internal_functions.c php_sprintf.c");
+```
+
+#### php_open_temporary_file.c
+Change file `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c`:
+1. Add lines to the top of file:
+```
+#if defined(ZTS) && defined(PHP_WIN32)
+#include "tls_var.h"
+#endif
+```
+2. Replace code block:
+```
+# old:
+__declspec(thread)
+# new:
+#define TLS_TEMPORARY_DIRECTORY
+TLSVar tls_temporary_directory = {0};
+```
+3. Add code at start of `php_shutdown_temporary_directory()`:
+```
+#ifdef TLS_TEMPORARY_DIRECTORY
+    temporary_directory = (char*)tls_get(&tls_temporary_directory);
+#endif
+```
+4. Add code at start of `php_get_temporary_directory()`:
+```
+#ifdef TLS_TEMPORARY_DIRECTORY
+    tls_init(&temporary_directory);
+    temporary_directory = (char*)tls_get(&tls_temporary_directory);
+#endif
+```
+5. Before each line:
+```
+  return temporary_directory;
+```
+...insert next code:
+```
+#ifdef TLS_TEMPORARY_DIRECTORY
+  tls_set(&tls_temporary_directory, temporary_directory);
+#endif
+```
+
+#### zend_execute_API.c
+Change file `C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c`:
+1. Add lines to the top of file:
+```
+#if defined(ZTS) && defined(PHP_WIN32)
+#include "../main/tls_var.h"
+#endif
+```
+2. Replace code block:
+```
+# old:
+__declspec(thread)
+# new:
 #define TLS_TQ_TIMER
-TLSVar tls_tq_timer = {0};<br />
-</blockquote>
-<br />
-Add code at start of zend_set_timeout() and zend_unset_timeout():
-<blockquote>
-#ifdef TLS_TQ_TIMER<br />
-	tls_init(&tls_tq_timer);<br />
-	tq_timer = (HANDLE)tls_get(&tls_tq_timer);<br />
+TLSVar tls_tq_timer = {0};
+```
+3. Add code at start of `zend_set_timeout()` and `zend_unset_timeout()`:
+```
+#ifdef TLS_TQ_TIMER
+    tls_init(&tls_tq_timer);
+    tq_timer = (HANDLE)tls_get(&tls_tq_timer);
 #endif
-</blockquote>
-After each tq_timer assignment add next lines:
-<blockquote>
-#ifdef TLS_TQ_TIMER<br />
-			tls_set(&tls_tq_timer, tq_timer);<br />
+```
+4. After each `tq_timer` assignment add next lines:
+```
+#ifdef TLS_TQ_TIMER
+            tls_set(&tls_tq_timer, tq_timer);
 #endif
-</blockquote><br/>
-					
-# Build extensions
+```
 
-1. Build [CURL library](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)  
-    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\bin\curl.exe  
-           *to*  
-           C:\php-sdk\phpdev\vc11\xXX\deps\bin  
-    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\include\\*  
-          *to*  
-           C:\php-sdk\phpdev\vc11\xXX\deps\include  
-    * Copy C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\lib\libcurl_a.lib  
-          *to*  
-          C:\php-sdk\phpdev\vc11\xXX\deps\lib
+## V. Build extensions
 
-# Compile
+### cURL
+
+1. Build CURL library as described in [build_curl.md](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)
+2. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\bin\curl.exe` to `C:\php-sdk\phpdev\vc11\xXX\deps\bin\`
+3. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\include\\*` to `C:\php-sdk\phpdev\vc11\xXX\deps\include\`
+4. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\lib\libcurl_a.lib` to `C:\php-sdk\phpdev\vc11\xXX\deps\lib\`
+
+## VI. Compile
 1. Open the command prompt and switch to the build directory:
-<blockquote>cd c:\php-sdk\phpdev\vc11\xXX </blockquote>
-2. Run buildphp.bat:  
-<blockquote>buildphp</blockquote>  
-2. Destination folder for binaries:<br/>
-    * *For x86*: C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS<br/>
-    * *For x64*: C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS<br/>
+```
+cd c:\php-sdk\phpdev\vc11\xXX
+```
+2. Run: `buildphp.bat`
+3. Destination folder for binaries:
+  * For **x86**: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS`
+  * For **x64**: `C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS`

@@ -36,7 +36,7 @@ Open the *VS2012 xXX Native Tools Command Prompt*.
 4. Run the buildtree batch script which will create the desired directory structure: `bin\phpsdk_buildtree.bat phpdev`
 5. Copy `C:\php-sdk\phpdev\vc9` to `C:\php-sdk\phpdev\vc11`
 6. Extract PHP source code to `C:\php-sdk\phpdev\vc11\xXX`
-   For example: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src`
+    * It will create sub-directory, for example: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src`
 7. Extract dependency libraries for building PHP:
     * Extract `deps-5.6-vc11-xXX.7z` into `C:\php-sdk\phpdev\vc11\xXX\`
 8. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:

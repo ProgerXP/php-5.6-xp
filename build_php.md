@@ -35,9 +35,11 @@ Open the *VS2012 xXX Native Tools Command Prompt*.
 3. Open command prompt and enter the build directory: `cd c:\php-sdk\`
 4. Run the buildtree batch script which will create the desired directory structure: `bin\phpsdk_buildtree.bat phpdev`
 5. Copy `C:\php-sdk\phpdev\vc9` to `C:\php-sdk\phpdev\vc11`
-6. Extract dependency libraries for building PHP:
+6. Extract PHP source code to `C:\php-sdk\phpdev\vc11\xXX`
+   For example: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src`
+7. Extract dependency libraries for building PHP:
     * Extract `deps-5.6-vc11-xXX.7z` into `C:\php-sdk\phpdev\vc11\xXX\`
-7. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:
+8. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:
 ```
 # for x86:
 phpdev\vc11\x86\buildphp.bat
@@ -175,7 +177,7 @@ int WSASendMsg(
         __inout_opt LPWSAOVERLAPPED lpOverlapped,
         __in_opt LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
     );
-\#endif //_WIN32_WINNT < 0x0600
+#endif //_WIN32_WINNT < 0x0600
 ```
 
 2.

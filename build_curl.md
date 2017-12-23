@@ -33,7 +33,7 @@ Now CURL sources need to be patched to support Windows XP. You can either apply 
 Set up nmake using v110_xp toolset in file `C:\php-sdk\phpdev\extensions\curl-7.50.3\winbuild\MakefileBuild.vc`:
 1. Add `D_USING_V110_SDK71_` directive:
 ```
-CC_NODEBUG  = cl.exe /O2 /DNDEBUG /D_USING_V110_SDK71_
+CC_NODEBUG  = $(CC) /O2 /DNDEBUG /D_USING_V110_SDK71_
 CFLAGS     = /I. /I../lib /I../include /nologo /W3 /GX /DWIN32 /YX /FD /c /DBUILDING_LIBCURL /D_USING_V110_SDK71_
 CURL_CFLAGS   =  /I../lib /I../include /nologo /W3 /EHsc /DWIN32 /FD /c /D_USING_V110_SDK71_
 ```

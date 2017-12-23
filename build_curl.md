@@ -65,5 +65,5 @@ nmake /f Makefile.vc mode=static VC=11 USE_IDN=0 WITH_SSL=static WITH_DEVEL="..\
 ```
 5. Destination folder for binaries:
 ```
-C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ipv6-sspi-winssl
+C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ipv6-sspi
 ```

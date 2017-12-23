@@ -6,17 +6,26 @@ https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/1.8.1/
 
 To install:
 
-1. Overwrite the `php` folder of your XAMPP with the contents of the `php` folder from `downloads\php4xampp-x86-bin.zip`. 
-2. You may need to install Visual C++ 2012 redistributable. The archive includes x86 redist. x64 redist is available from microsoft.com.
-3. This build bundles all supported extensions except for `curl` and `fileinfo` so comment out all `extension=xxx` lines in `php\php.ini` except for these two.
+1. Overwrite the `php` folder of your XAMPP with the contents of the corresponding folder in `release\` (typically `release\x86\`).
+2. Install Visual C++ 2012 redistributable, if required. You can get it from `downloads\`.
+3. This build bundles all supported extensions except for `curl`, `fileinfo` and `xdebug` (also ported to XP) so comment out all `extension=xxx` lines in `php.ini` except for these.
 
 ## php -v
 
 ```
 PHP 5.6.24 (cli) (built: Oct  6 2016 08:55:15)
 Copyright (c) 1997-2016 The PHP Group
-Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies	
+Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 ```
+
+Compilation     | settings
+----------------|--------------------------
+Build type      | Release
+Thread safety   | yes
+Compiler        | MSVC11 (Visual C++ 2012)
+Architecture    | x86
+Optimization    | PGO disabled
+Static analyzer | disabled
 
 ## Extensions
 
@@ -25,12 +34,12 @@ bz2
 calendar
 Core
 ctype
-curl
+[curl]
 date
 dom
 ereg
 exif
-fileinfo
+[fileinfo]
 filter
 gd
 gettext
@@ -60,6 +69,7 @@ SPL
 sqlite3
 standard
 tokenizer
+[xdebug]
 xml
 xmlreader
 xmlrpc
@@ -68,3 +78,12 @@ zip
 zlib
 ```
 
+### --with-xdebug
+In case it's useful to somebody, `release\php4xampp-xdebug.zip` is a build of PHP (x86) with statically linked XDebug (`--with-xdebug` option). It should work the same way as the separate DLL.
+
+## Enabled SAPIs
+
+```
+apache2_4handler
+cli
+```

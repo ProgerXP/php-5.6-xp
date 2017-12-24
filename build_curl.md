@@ -28,6 +28,18 @@ Now CURL sources need to be patched to support Windows XP. You can either apply 
 3. Open the command prompt and switch to working directory: `cd c:\php-sdk\extensions`
 4. Apply the patch: `patch.exe -p0 -u <curl-7.50.3.patch`
 
+Notes about `patch.exe`:
+* If running `patch.exe` brings up UAC prompt - try renaming the program, for example to `p.exe`.
+* If you get a runtime error as below - it may be due to your `.patch` file using non-Windows line endings. Open it in a text editor such as [Notepad 2e](https://github.com/ProgerXP/Notepad2e), convert line endings to CR/LF, save and re-run `patch`.
+
+```
+patching file ...
+Assertion failed: hunk, file ..., line ...
+
+This application has requested the Runtime to terminate it in an unusual way.
+Please contact the application's support team for more information.
+```
+
 ### Option 2: manual patching
 
 Set up nmake using v110_xp toolset in file `C:\php-sdk\phpdev\extensions\curl-7.50.3\winbuild\MakefileBuild.vc`:

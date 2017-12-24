@@ -27,6 +27,18 @@ Now XDebug sources need to be patched to support Windows XP. You can either appl
 3. Open the command prompt and switch to working directory: `cd c:\php-sdk\xdebug`
 4. Apply the patch: `patch.exe -p0 -u <xdebug-2.5.5.patch`
 
+Notes about `patch.exe`:
+* If running `patch.exe` brings up UAC prompt - try renaming the program, for example to `p.exe`.
+* If you get a runtime error as below - it may be due to your `.patch` file using non-Windows line endings. Open it in a text editor such as [Notepad 2e](https://github.com/ProgerXP/Notepad2e), convert line endings to CR/LF, save and re-run `patch`.
+
+```
+patching file ...
+Assertion failed: hunk, file ..., line ...
+
+This application has requested the Runtime to terminate it in an unusual way.
+Please contact the application's support team for more information.
+```
+
 ### Option 2: manual patching
 
 1. Replace includes in .c files:

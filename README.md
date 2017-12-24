@@ -87,3 +87,6 @@ In case it's useful to somebody, `release\php4xampp-xdebug.zip` is a build of PH
 apache2_4handler
 cli
 ```
+
+## `working-tree` branch
+The `working-tree` branch contains code prepared for compilation with Visual Studio, with necessary patches and projects (you still need the necessary prerequisites). You can use it if you're lazy and don't want to patch your own sources according to instructions (`build_php.md`, `build_curl.md`, `build_xdebug.md`).

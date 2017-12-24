@@ -60,7 +60,17 @@ Now PHP sources need to be patched to support Windows XP. You can either apply a
 3. Open the command prompt and switch to working directory: `cd c:\php-sdk\vc11\xXX`
 4. Apply the patch: `patch.exe -p0 -u <php-5.6.24.patch`
 
-If running `patch.exe` brings up UAC prompt - try renaming the program, for example to `p.exe`.
+Notes about `patch.exe`:
+* If running `patch.exe` brings up UAC prompt - try renaming the program, for example to `p.exe`.
+* If you get a runtime error as below - it may be due to your `.patch` file using non-Windows line endings. Open it in a text editor such as [Notepad 2e](https://github.com/ProgerXP/Notepad2e), convert line endings to CR/LF, save and re-run `patch`.
+
+```
+patching file ...
+Assertion failed: hunk, file ..., line ...
+
+This application has requested the Runtime to terminate it in an unusual way.
+Please contact the application's support team for more information.
+```
 
 ### Option 2: manual patching
 
@@ -284,7 +294,7 @@ int WSASendMsg(
 
 #### php_open_temporary_file.c
 Change file `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\main\php_open_temporary_file.c`:
-1. Add lines to the top of file:
+1. Add lines to the top of file (after all `#include` blocks):
 ```
 #if defined(ZTS) && defined(PHP_WIN32)
 #include "tls_var.h"
@@ -324,7 +334,7 @@ TLSVar tls_temporary_directory = {0};
 
 #### zend_execute_API.c
 Change file `C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c`:
-1. Add lines to the top of file:
+1. Add lines to the top of file (after all `#include` blocks):
 ```
 #if defined(ZTS) && defined(PHP_WIN32)
 #include "../main/tls_var.h"

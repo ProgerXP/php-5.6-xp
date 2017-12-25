@@ -169,9 +169,8 @@ case PRODUCT_PROFESSIONAL_WMC:
 ```
 
 #### php_sockets.h
-Add code to `C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h`:
+Add code to `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\php_sockets.h`:
 
-1.
 ```
 #if (_WIN32_WINNT < 0x0600)
 #define CMSG_SPACE WSA_CMSG_SPACE
@@ -192,7 +191,8 @@ int WSASendMsg(
 #endif //_WIN32_WINNT < 0x0600
 ```
 
-2.
+#### sockets.c
+Add code to `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\ext\sockets\sockets.c`:
 ```
 #if (_WIN32_WINNT < 0x0600)
 WINAPI if_nametoindex (__in PCSTR iface)
@@ -258,7 +258,7 @@ int WSASendMsg(
     {
         return 0;
     }
-    for (i = 0; i dwBufferCount; i++)
+    for (i = 0; i lpMsg->dwBufferCount; i++)
     {
         WSABUF wsaBuf = lpMsg->lpBuffers[i];
         if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))
@@ -333,7 +333,7 @@ TLSVar tls_temporary_directory = {0};
 ```
 
 #### zend_execute_API.c
-Change file `C:\php-sdl\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c`:
+Change file `C:\php-sdk\phpdev\vc11\xXX\php-5.6.24-src\Zend\zend_execute_API.c`:
 1. Add lines to the top of file (after all `#include` blocks):
 ```
 #if defined(ZTS) && defined(PHP_WIN32)

@@ -1,0 +1,97 @@
+# A Sybase schema
+#
+attributetype ( 1.3.6.1.4.1.897.4.2.1 NAME 'sybaseVersion'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.2 NAME 'sybaseServername'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15  )
+attributetype ( 1.3.6.1.4.1.897.4.2.3 NAME 'sybaseService'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15  )
+attributetype ( 1.3.6.1.4.1.897.4.2.4 NAME 'sybaseStatus'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.5 NAME 'sybaseAddress'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15  )
+attributetype ( 1.3.6.1.4.1.897.4.2.6 NAME 'sybaseSecurity'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15  )
+attributetype ( 1.3.6.1.4.1.897.4.2.7 NAME 'sybaseRetryCount'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.8 NAME 'sybaseRetryDelay'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.9 NAME 'sybaseJconnectProtocol'
+        EQUALITY caseExactMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.10 NAME 'sybaseJconnectProperty'
+        EQUALITY caseIgnoreMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15  )
+attributetype ( 1.3.6.1.4.1.897.4.2.11 NAME 'sybaseDatabaseName'
+        EQUALITY caseExactMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.15 NAME 'sybaseHAservername'
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+        SINGLE-VALUE )
+attributetype ( 1.3.6.1.4.1.897.4.2.16 NAME 'sybaseResourceManagerName'
+        EQUALITY caseExactMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.17 NAME 'sybaseResourceManagerType'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.36
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.18 NAME 'sybaseJdbcDataSourceInterface'
+        EQUALITY caseIgnoreMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+        SINGLE-VALUE
+        )
+attributetype ( 1.3.6.1.4.1.897.4.2.19 NAME 'sybaseServerType'
+        EQUALITY caseIgnoreMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+        SINGLE-VALUE
+        )
+#
+# Sybase SQL Server Object Class
+#
+objectclass ( 1.3.6.1.4.1.897.4.1.1 NAME 'sybaseServer'
+        MUST (
+                objectClass $
+                sybaseServername $
+                sybaseAddress )
+        MAY (
+                sybaseVersion $
+                sybaseService $
+                sybaseStatus $
+                sybaseSecurity $
+                sybaseRetryCount $
+                sybaseRetryDelay $
+                sybaseJconnectProtocol $
+                sybaseJconnectProperty $
+                sybaseDatabaseName $
+                sybaseHAservername $
+                sybaseResourceManagerName $
+                sybaseResourceManagerType $
+                sybaseJdbcDataSourceInterface $
+                sybaseServerType
+                )
+ )

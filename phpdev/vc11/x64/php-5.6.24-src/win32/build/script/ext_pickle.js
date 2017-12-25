@@ -1,0 +1,2 @@
+PHP_XDEBUG=true;
+PHP_XDEBUG_SHARED=true;

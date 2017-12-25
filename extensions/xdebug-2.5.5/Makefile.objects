@@ -1,0 +1,64 @@
+
+# objects for EXT xdebug
+
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\usefulstuff.obj: C:\php-sdk\extensions\xdebug-2.5.5\usefulstuff.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\usefulstuff.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\usefulstuff.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_branch_info.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_branch_info.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_branch_info.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_branch_info.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_code_coverage.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_code_coverage.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_code_coverage.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_code_coverage.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_com.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_com.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_com.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_com.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_compat.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_compat.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_compat.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_compat.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_handler_dbgp.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_handler_dbgp.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_handler_dbgp.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_handler_dbgp.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_handlers.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_handlers.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_handlers.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_handlers.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_hash.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_hash.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_hash.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_hash.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_llist.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_llist.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_llist.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_llist.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_monitor.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_monitor.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_monitor.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_monitor.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_private.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_private.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_private.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_private.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_profiler.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_profiler.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_profiler.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_profiler.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_set.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_set.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_set.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_set.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_stack.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_stack.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_stack.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_stack.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_str.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_str.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_str.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_str.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_superglobals.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_superglobals.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_superglobals.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_superglobals.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_computerized.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_computerized.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_computerized.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_computerized.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_html.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_html.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_html.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_html.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_textual.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_textual.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_textual.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_trace_textual.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_tracing.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_tracing.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_tracing.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_tracing.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_var.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_var.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_var.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_var.obj
+$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_xml.obj: C:\php-sdk\extensions\xdebug-2.5.5\xdebug_xml.c
+	@$(CC) $(CFLAGS_XDEBUG_OBJ) $(CFLAGS) $(CFLAGS_BD_PHP_SDK_EXTENSIONS_XDEBUG_2_5_5) /c C:\php-sdk\extensions\xdebug-2.5.5\xdebug_xml.c /Fo$(BUILD_DIR)\php-sdk\extensions\xdebug-2.5.5\xdebug_xml.obj
+
+$(BUILD_DIR)\php_xdebug.dll.res: $(PHP_DIR)\build\template.rc
+	$(RC)  /I $(PHP_DIR)/include /n /fo $(BUILD_DIR)\php_xdebug.dll.res /d FILE_DESCRIPTION="\"Xdebug\"" /d FILE_NAME="\"php_xdebug.dll\"" /d URL="\"http://www.php.net\"" /d INTERNAL_NAME="\"XDEBUG extension\"" /d THANKS_GUYS="\"Thanks to Derick Rethans, Ilia Alshanetsky, Harald Radi\"" $(PHP_DIR)\build\template.rc
+
+$(BUILD_DIR)\php_xdebug.dll.manifest: C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\win32\build\build\default.manifest
+	@copy C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\win32\build\build\default.manifest $(BUILD_DIR)\php_xdebug.dll.manifest
+$(BUILD_DIR)\php_xdebug.lib: $(BUILD_DIR)\php_xdebug.dll
+
+$(BUILD_DIR)\php_xdebug.dll: $(DEPS_XDEBUG) $(XDEBUG_GLOBAL_OBJS) $(PHPLIB) $(BUILD_DIR)\php_xdebug.dll.res $(BUILD_DIR)\php_xdebug.dll.manifest
+	@$(CC) $(XDEBUG_GLOBAL_OBJS) $(PHPLIB) $(LIBS_XDEBUG) $(LIBS) $(BUILD_DIR)\php_xdebug.dll.res /link /out:$(BUILD_DIR)\php_xdebug.dll $(DLL_LDFLAGS) $(LDFLAGS) $(LDFLAGS_XDEBUG)
+	-@$(_VC_MANIFEST_EMBED_DLL)
+
+php_xdebug.dll: $(BUILD_DIR)\php_xdebug.dll
+	@echo EXT xdebug build complete
+

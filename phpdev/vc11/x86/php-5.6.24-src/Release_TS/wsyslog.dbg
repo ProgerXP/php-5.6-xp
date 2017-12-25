@@ -1,0 +1,16 @@
+//
+// This file maps message Id values in to a text string that contains
+// the symbolic name used for the message Id.  Useful for debugging
+// output.
+//
+
+struct {
+    DWORD MessageId;
+    char *SymbolicName;
+} wsyslogSymbolicNames[] = {
+ (DWORD) PHP_SYSLOG_SUCCESS_TYPE, "PHP_SYSLOG_SUCCESS_TYPE",
+ (DWORD) PHP_SYSLOG_INFO_TYPE, "PHP_SYSLOG_INFO_TYPE",
+ (DWORD) PHP_SYSLOG_WARNING_TYPE, "PHP_SYSLOG_WARNING_TYPE",
+ (DWORD) PHP_SYSLOG_ERROR_TYPE, "PHP_SYSLOG_ERROR_TYPE",
+ (DWORD) 0xFFFFFFFF, NULL
+};

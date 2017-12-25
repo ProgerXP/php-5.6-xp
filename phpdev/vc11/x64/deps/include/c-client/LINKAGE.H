@@ -1,0 +1,15 @@
+extern DRIVER imapdriver; 
+extern DRIVER nntpdriver; 
+extern DRIVER pop3driver; 
+extern DRIVER mbxdriver; 
+extern DRIVER mtxdriver; 
+extern DRIVER tenexdriver; 
+extern DRIVER unixdriver; 
+extern DRIVER dummydriver; 
+#define CREATEPROTO mbxproto 
+#define APPENDPROTO unixproto 
+extern AUTHENTICATOR auth_ext; 
+extern AUTHENTICATOR auth_gss; 
+extern AUTHENTICATOR auth_md5; 
+extern AUTHENTICATOR auth_pla; 
+extern AUTHENTICATOR auth_log; 

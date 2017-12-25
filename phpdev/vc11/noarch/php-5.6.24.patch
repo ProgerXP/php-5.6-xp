@@ -449,12 +449,12 @@ diff -r -u php-5.6.24-src-origin\win32\select.c php-5.6.24-src\win32\select.c
 @@ -97,7 +97,7 @@
  	FD_ZERO(&awrite);
  	FD_ZERO(&aexcept);
-
+ 	
 -	limit = GetTickCount64() + ms_total;
 +	limit = GetTickCount() + ms_total;
  	do {
  		retcode = 0;
-
+ 	
 @@ -149,7 +149,7 @@
  				}
  			}

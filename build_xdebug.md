@@ -102,7 +102,7 @@ static int poll(struct pollfd fds[], int nfds, int timeout)
 ```
 
 ## Compile
-1. Build PHP as described in "Compile for XDebug" section [build_php.md](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_php.md)
+1. Build PHP as described in **Compile for XDebug** section of [build_php.md](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_php.md)
 2. Open the command prompt and switch to the build directory:
 ```
 cd c:\php-sdk\extensions

@@ -258,7 +258,7 @@ int WSASendMsg(
     {
         return 0;
     }
-    for (i = 0; i lpMsg->dwBufferCount; i++)
+    for (i = 0; i < lpMsg->dwBufferCount; i++)
     {
         WSABUF wsaBuf = lpMsg->lpBuffers[i];
         if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))

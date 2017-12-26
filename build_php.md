@@ -37,9 +37,10 @@ Open the *VS2012 xXX Native Tools Command Prompt*.
 5. Copy `C:\php-sdk\phpdev\vc9` to `C:\php-sdk\phpdev\vc11`
 6. Extract PHP source code to `C:\php-sdk\phpdev\vc11\xXX`
     * It will create sub-directory, for example: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src`
-7. Extract dependency libraries for building PHP:
+7. Copy `C:\php-sdk\phpdev\vc11\noarch` to `C:\php-sdk\phpdev\vc11\xXX`
+8. Extract dependency libraries for building PHP:
     * Extract `deps-5.6-vc11-xXX.7z` into `C:\php-sdk\phpdev\vc11\xXX\`
-8. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:
+9. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:
 ```
 # for x86:
 phpdev\vc11\x86\buildphp.bat

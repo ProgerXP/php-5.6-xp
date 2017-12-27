@@ -61,21 +61,13 @@ CURL_LFLAGS   = /nologo /out:$(DIRDIST)\bin\$(PROGRAM_NAME) /SUBSYSTEM:CONSOLE,5
 ## Compile
 1. Open the command prompt and enter the build directory:
 ```
-cd c:\php-sdk\extensions\curl\curl-7.50.3\winbuild
+cd c:\php-sdk\extensions
 ```
 2. Run:
 ```
-C:\php-sdk\phpdev\vc11\xXX\xpinitxXX.bat
+buildcurlXX.bat
 ```
-3. Run, for **x86**:
-```
-nmake /f Makefile.vc mode=static VC=11 USE_IDN=0 WITH_SSL=static WITH_DEVEL="..\..\..\phpdev\vc11\x86\deps"
-```
-4. Run, for **x64**:
-```
-nmake /f Makefile.vc mode=static VC=11 USE_IDN=0 WITH_SSL=static WITH_DEVEL="..\..\..\phpdev\vc11\x64\deps" MACHINE=x64
-```
-5. Destination folder for binaries:
+3. Destination folder for binaries:
 ```
 C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ipv6-sspi
 ```

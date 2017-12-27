@@ -377,18 +377,7 @@ TLSVar tls_tq_timer = {0};
 ```
 cd c:\php-sdk\phpdev\vc11\xXX
 ```
-2. Run: `buildphp.bat`
+2. Run: `buildphpXX.bat`
 3. Destination folder for binaries:
   * For **x86**: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS`
   * For **x64**: `C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS`
-
-## VII. Compile for XDebug
-1. Open the command prompt and switch to the build directory:
-```
-cd c:\php-sdk\phpdev\vc11\xXX
-```
-2. Run: `buildphp-xdebug.bat`
-3. Destination folder for binaries:
-  * For **x86**: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS`
-  * For **x64**: `C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS`
-

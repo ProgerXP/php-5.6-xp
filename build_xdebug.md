@@ -49,7 +49,12 @@ Please contact the application's support team for more information.
 #include "main/SAPI.h"
 ```
 
-2. Add code to `xdebug_com.c` before `xdebug_create_socket()`:
+2. Remove code from `xdebug_com.c`:
+```
+# define poll WSAPoll
+```
+
+3. Add code to `xdebug_com.c` before `xdebug_create_socket()`:
 ```
 typedef struct pollfd {
   SOCKET fd;
@@ -70,22 +75,18 @@ typedef struct pollfd {
 #define POLLHUP     0x0002
 #define POLLNVAL    0x0004
 
-#define WSAPoll(fd,nfd,t) poll(fd,nfd,t)
-
-// Original source:
-// http://www.slac.stanford.edu/accel/ilc/codes/ATF2/control-software/epics-3.14.10/support/asyn/asyn-4-11/asyn/drvAsynSerial/drvAsynIPPort.c
-/*
- * Use select() to simulate enough of poll() to get by.
- */
-
 static int poll(struct pollfd fds[], int nfds, int timeout)
 {
-    fd_set fdset;
+    int retval;
+    fd_set rset, wrset, exset;
     struct timeval tv, *ptv;
-
-    // assert(nfds == 1);
-    FD_ZERO(&fdset);
-    FD_SET(fds[0].fd,&fdset);
+    FD_ZERO(&rset);
+    FD_ZERO(&wrset);
+    FD_ZERO(&exset);
+    FD_SET(fds[0].fd, &rset);
+    FD_SET(fds[0].fd, &wrset);
+    FD_SET(fds[0].fd, &exset);
+    fds[0].revents = 0;
     if (timeout >= 0) {
         tv.tv_sec = timeout / 1000;
         tv.tv_usec = (timeout % 1000) * 1000;
@@ -93,12 +94,29 @@ static int poll(struct pollfd fds[], int nfds, int timeout)
     } else {
         ptv = NULL;
     }
-    return select(fds[0].fd + 1,
-        (fds[0].events & POLLIN) ? &fdset : NULL,
-        (fds[0].events & POLLOUT) ? &fdset : NULL,
-        NULL,
-        ptv);
+    retval = select(0, &rset, &wrset, &exset, ptv);
+    if (retval == 1) {
+        if (FD_ISSET(fds[0].fd, &rset)) {
+            fds[0].revents |= POLLIN;
+        }
+        if (FD_ISSET(fds[0].fd, &wrset)) {
+            fds[0].revents |= POLLOUT;
+        }
+        if (FD_ISSET(fds[0].fd, &exset)) {
+            fds[0].revents |= POLLERR;
+        }
+    }
+    return retval;
 }
+
+```
+4. Replace condition in `xdebug_com.c` in `xdebug_create_socket()`:
+```
+				if (errno == WSAEINPROGRESS || errno == WSAEWOULDBLOCK) {
+```
+with
+```
+				if (errno == WSAEINPROGRESS) {
 ```
 
 ## Compile

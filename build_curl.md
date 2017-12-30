@@ -1,4 +1,5 @@
 # Building cURL extension for Windows XP
+In this text, **xXX** means **x86** or **x64** depending on the required build version.
 
 ## Set up compiler
 
@@ -23,8 +24,8 @@ Open the *VS2012 xXX Native Tools Command Prompt*.
 Now CURL sources need to be patched to support Windows XP. You can either apply a provided patch file or go over all changes manually.
 
 ### Option 1: apply patch
-1. Get CURL patch: `extensions\curl-7.50.3.patch`
-2. Get `patch.exe` utility from `downloads\` or from [UnxUtils](https://sourceforge.net/projects/unxutils)
+1. Get CURL patch: [curl-7.50.3.patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/extensions/curl-7.50.3.patch)
+2. Get `patch.exe` utility [downloads\patch.exe](https://github.com/ProgerXP/php-5.6-xp/blob/master/downloads/patch.exe) or from [UnxUtils](https://sourceforge.net/projects/unxutils)
 3. Open the command prompt and switch to working directory: `cd c:\php-sdk\extensions`
 4. Apply the patch: `patch.exe -p0 -u <curl-7.50.3.patch`
 
@@ -42,7 +43,7 @@ Please contact the application's support team for more information.
 
 ### Option 2: manual patching
 
-Set up nmake using v110_xp toolset in file `C:\php-sdk\phpdev\extensions\curl-7.50.3\winbuild\MakefileBuild.vc`:
+Set up nmake using v110_xp toolset in file `C:\php-sdk\extensions\curl-7.50.3\winbuild\MakefileBuild.vc`:
 1. Add `D_USING_V110_SDK71_` directive:
 ```
 CC_NODEBUG  = $(CC) /O2 /DNDEBUG /D_USING_V110_SDK71_

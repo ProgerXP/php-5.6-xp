@@ -1,4 +1,5 @@
 # Building XDebug extension for Windows XP
+In this text, **xXX** means **x86** or **x64** depending on the required build version.
 
 ## Set up compiler
 
@@ -22,9 +23,9 @@ Unpack XDebug sources archive into directory: `c:\php-sdk\extensions\`
 Now XDebug sources need to be patched to support Windows XP. You can either apply a provided patch file or go over all changes manually.
 
 ### Option 1: apply patch
-1. Get XDebug patch: `extensions\xdebug-2.5.5.patch`
-2. Get `patch.exe` utility from `downloads\` or from [UnxUtils](https://sourceforge.net/projects/unxutils)
-3. Open the command prompt and switch to working directory: `cd c:\php-sdk\xdebug`
+1. Get XDebug patch: [xdebug-2.5.5.patch](https://github.com/ProgerXP/php-5.6-xp/blob/master/extensions/xdebug-2.5.5.patch)
+2. Get `patch.exe` utility [downloads\patch.exe](https://github.com/ProgerXP/php-5.6-xp/blob/master/downloads/patch.exe) or from [UnxUtils](https://sourceforge.net/projects/unxutils)
+3. Open the command prompt and switch to working directory: `cd c:\php-sdk\extensions`
 4. Apply the patch: `patch.exe -p0 -u <xdebug-2.5.5.patch`
 
 Notes about `patch.exe`:

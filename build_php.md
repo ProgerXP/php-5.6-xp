@@ -368,9 +368,7 @@ TLSVar tls_tq_timer = {0};
 ### cURL
 
 1. Build CURL library as described in [build_curl.md](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)
-2. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\bin\curl.exe` to `C:\php-sdk\phpdev\vc11\xXX\deps\bin\`
-3. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\include\\*` to `C:\php-sdk\phpdev\vc11\xXX\deps\include\`
-4. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\lib\libcurl_a.lib` to `C:\php-sdk\phpdev\vc11\xXX\deps\lib\`
+2. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\*` to `C:\php-sdk\phpdev\vc11\xXX\deps\`
 
 ## VI. Compile
 1. Open the command prompt and switch to the build directory:

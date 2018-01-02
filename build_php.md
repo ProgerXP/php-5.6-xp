@@ -56,9 +56,9 @@ phpdev\vc11\x64\xpinitx64.bat
 Now PHP sources need to be patched to support Windows XP. You can either apply a provided patch file (easy way) or go over all changes manually (long way).
 
 ### Option 1: apply patch
-1. Copy PHP patch `phpdev\vc11\noarch\php-5.6.24.patch` to `vc11\xXX\`
+1. Copy PHP patch `phpdev\vc11\noarch\php-5.6.24.patch` to `phpdev\vc11\xXX\`
 2. Get `patch.exe` utility from `downloads\` or from [UnxUtils](https://sourceforge.net/projects/unxutils)
-3. Open the command prompt and switch to working directory: `cd c:\php-sdk\vc11\xXX`
+3. Open the command prompt and switch to working directory: `cd c:\php-sdk\phpdev\vc11\xXX`
 4. Apply the patch: `patch.exe -p0 -u <php-5.6.24.patch`
 
 Notes about `patch.exe`:

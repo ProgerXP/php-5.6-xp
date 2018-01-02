@@ -113,10 +113,9 @@ static int poll(struct pollfd fds[], int nfds, int timeout)
 ```
 4. Replace condition in `xdebug_com.c`, in `xdebug_create_socket()`:
 ```
+# old:
 if (errno == WSAEINPROGRESS || errno == WSAEWOULDBLOCK) {
-```
-with
-```
+# new:
 if (errno == WSAEINPROGRESS) {
 ```
 

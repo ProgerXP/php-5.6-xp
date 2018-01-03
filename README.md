@@ -78,9 +78,6 @@ zip
 zlib
 ```
 
-### --with-xdebug
-In case it's useful to somebody, `release\php4xampp-xdebug.zip` is a build of PHP (x86) with statically linked XDebug (`--with-xdebug` option). It should work the same way as the separate DLL.
-
 ## Enabled SAPIs
 
 ```

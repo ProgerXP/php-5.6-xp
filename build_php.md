@@ -37,9 +37,10 @@ Open the *VS2012 xXX Native Tools Command Prompt*.
 5. Copy `C:\php-sdk\phpdev\vc9` to `C:\php-sdk\phpdev\vc11`
 6. Extract PHP source code to `C:\php-sdk\phpdev\vc11\xXX`
     * It will create sub-directory, for example: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src`
-7. Extract dependency libraries for building PHP:
+7. Copy `C:\php-sdk\phpdev\vc11\noarch` to `C:\php-sdk\phpdev\vc11\xXX`
+8. Extract dependency libraries for building PHP:
     * Extract `deps-5.6-vc11-xXX.7z` into `C:\php-sdk\phpdev\vc11\xXX\`
-8. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:
+9. Copy BAT files to `C:\php-sdk\phpdev\vc11\xXX\`:
 ```
 # for x86:
 phpdev\vc11\x86\buildphp.bat
@@ -55,9 +56,9 @@ phpdev\vc11\x64\xpinitx64.bat
 Now PHP sources need to be patched to support Windows XP. You can either apply a provided patch file (easy way) or go over all changes manually (long way).
 
 ### Option 1: apply patch
-1. Copy PHP patch `phpdev\vc11\noarch\php-5.6.24.patch` to `vc11\xXX\`
+1. Copy PHP patch `phpdev\vc11\noarch\php-5.6.24.patch` to `phpdev\vc11\xXX\`
 2. Get `patch.exe` utility from `downloads\` or from [UnxUtils](https://sourceforge.net/projects/unxutils)
-3. Open the command prompt and switch to working directory: `cd c:\php-sdk\vc11\xXX`
+3. Open the command prompt and switch to working directory: `cd c:\php-sdk\phpdev\vc11\xXX`
 4. Apply the patch: `patch.exe -p0 -u <php-5.6.24.patch`
 
 Notes about `patch.exe`:
@@ -258,7 +259,7 @@ int WSASendMsg(
     {
         return 0;
     }
-    for (i = 0; i lpMsg->dwBufferCount; i++)
+    for (i = 0; i < lpMsg->dwBufferCount; i++)
     {
         WSABUF wsaBuf = lpMsg->lpBuffers[i];
         if ((tmplen + wsaBuf.len) > sizeof(tmpbuf))
@@ -367,16 +368,14 @@ TLSVar tls_tq_timer = {0};
 ### cURL
 
 1. Build CURL library as described in [build_curl.md](https://github.com/ProgerXP/php-5.6-xp/blob/master/build_curl.md)
-2. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\bin\curl.exe` to `C:\php-sdk\phpdev\vc11\xXX\deps\bin\`
-3. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\include\\*` to `C:\php-sdk\phpdev\vc11\xXX\deps\include\`
-4. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\lib\libcurl_a.lib` to `C:\php-sdk\phpdev\vc11\xXX\deps\lib\`
+2. Copy `C:\php-sdk\extensions\curl-7.50.3\builds\libcurl-vc11-xXX-release-static-ssl-static-ipv6-sspi\*` to `C:\php-sdk\phpdev\vc11\xXX\deps\`
 
 ## VI. Compile
 1. Open the command prompt and switch to the build directory:
 ```
 cd c:\php-sdk\phpdev\vc11\xXX
 ```
-2. Run: `buildphp.bat`
+2. Run: `buildphpXX.bat`
 3. Destination folder for binaries:
   * For **x86**: `C:\php-sdk\phpdev\vc11\x86\php-5.6.24-src\Release_TS`
   * For **x64**: `C:\php-sdk\phpdev\vc11\x64\php-5.6.24-src\x64\Release_TS`

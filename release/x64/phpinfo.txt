@@ -2,7 +2,7 @@ phpinfo()
 PHP Version => 5.6.24
 
 System => Windows NT HUMMER 6.1 build 7601 (Windows 7 Ultimate Edition Service Pack 1) AMD64
-Build Date => Nov 29 2017 23:02:42
+Build Date => Dec 27 2017 23:20:15
 Compiler => MSVC11 (Visual C++ 2012)
 Architecture => x64
 Configure Command => cscript /nologo configure.js  "--disable-all" "--enable-cli" "--with-curl" "--enable-calendar" "--enable-ctype" "--enable-fileinfo" "--enable-filter" "--with-gd" "--enable-hash" "--with-iconv" "--enable-json" "--enable-mbstring" "--with-mcrypt" "--with-mysqli" "--with-mysqlnd" "--with-openssl" "--enable-pdo" "--with-pdo-mysql" "--enable-session" "--enable-zlib" "--with-bz2" "--with-libxml" "--with-dom" "--enable-exif" "--with-gettext" "--with-gmp" "--with-mysql" "--with-pdo-pgsql" "--with-pgsql" "--with-pdo-sqlite" "--enable-phar" "--with-simplexml" "--enable-sockets" "--enable-tokenizer" "--with-sqlite3" "--with-xml" "--enable-xmlreader" "--enable-xmlwriter" "--enable-zip" "--with-xmlrpc" "--enable-apache2-4handler"
@@ -153,7 +153,7 @@ date/time support => enabled
 "Olson" Timezone Database Version => 2016.6
 Timezone Database => internal
 
-Warning: phpinfo(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in C:\Work\git\php-5.6-xp\php-5.6.24-xp-x64-bin\phpinfo.php on line 2
+Warning: phpinfo(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in C:\Work\git\php-5.6-xp\release\x64\phpinfo.php on line 2
 Default timezone => UTC
 
 Directive => Local Value => Master Value
@@ -181,7 +181,7 @@ Regex Library => Bundled library enabled
 exif
 
 EXIF Support => enabled
-EXIF Version => 1.4 $Id: bffe98d3a9e6c6ccc5a3881247b97a4dff781b15 $
+EXIF Version => 1.4 $Id: 5564de4b4a8fd6b32ae8bd44debf9f13b18c7768 $
 Supported EXIF Version => 0220
 Supported filetypes => JPEG,TIFF
 
@@ -196,7 +196,7 @@ exif.encode_unicode => ISO-8859-15 => ISO-8859-15
 filter
 
 Input Validation and Filtering => enabled
-Revision => $Id: da8df1bb3bb0938d3ce41928c41d0d7b9fb15b22 $
+Revision => $Id: 0a967738ca580e8bfdacb06853749743fc79b969 $
 
 Directive => Local Value => Master Value
 filter.default => unsafe_raw => unsafe_raw
@@ -235,7 +235,7 @@ MPIR version => 2.7.2
 hash
 
 hash support => enabled
-Hashing Engines => md2 md4 md5 sha1 sha224 sha256 sha384 sha512 ripemd128 ripemd160 ripemd256 ripemd320 whirlpool tiger128,3 tiger160,3 tiger192,3 tiger128,4 tiger160,4 tiger192,4 snefru snefru256 gost gost-crypto adler32 crc32 crc32b fnv132 fnv1a32 fnv164 fnv1a64 joaat haval128,3 haval160,3 haval192,3 haval224,3 haval256,3 haval128,4 haval160,4 haval192,4 haval224,4 haval256,4 haval128,5 haval160,5 haval192,5 haval224,5 haval256,5
+Hashing Engines => md2 md4 md5 sha1 sha224 sha256 sha384 sha512 ripemd128 ripemd160 ripemd256 ripemd320 whirlpool tiger128,3 tiger160,3 tiger192,3 tiger128,4 tiger160,4 tiger192,4 snefru snefru256 gost gost-crypto adler32 crc32 crc32b fnv132 fnv1a32 fnv164 fnv1a64 joaat haval128,3 haval160,3 haval192,3 haval224,3 haval256,3 haval128,4 haval160,4 haval192,4 haval224,4 haval256,4 haval128,5 haval160,5 haval192,5 haval224,5 haval256,5 
 
 iconv
 
@@ -287,8 +287,8 @@ mcrypt support => enabled
 mcrypt_filter support => enabled
 Version => 2.5.8
 Api No => 20021217
-Supported ciphers => cast-128 gost rijndael-128 twofish cast-256 loki97 rijndael-192 saferplus wake blowfish-compat des rijndael-256 serpent xtea blowfish enigma rc2 tripledes arcfour
-Supported modes => cbc cfb ctr ecb ncfb nofb ofb stream
+Supported ciphers => cast-128 gost rijndael-128 twofish cast-256 loki97 rijndael-192 saferplus wake blowfish-compat des rijndael-256 serpent xtea blowfish enigma rc2 tripledes arcfour 
+Supported modes => cbc cfb ctr ecb ncfb nofb ofb stream 
 
 Directive => Local Value => Master Value
 mcrypt.algorithms_dir => no value => no value
@@ -351,7 +351,7 @@ Tracing => n/a
 Loaded plugins => mysqlnd,debug_trace,auth_plugin_mysql_native_password,auth_plugin_mysql_clear_password
 API Extensions => mysql,mysqli,pdo_mysql
 
-mysqlnd statistics =>
+mysqlnd statistics =>  
 bytes_sent => 0
 bytes_received => 0
 packets_sent => 0
@@ -549,7 +549,7 @@ pdo_pgsql
 PDO Driver for PostgreSQL => enabled
 PostgreSQL(libpq) Version => 9.4.5
 Module version => 1.0.2
-Revision =>  $Id: 4261489546839c995e4a7d6fe4c015b505fcbb79 $
+Revision =>  $Id: 0e858dd2051ca8c2fd3c781909a0670ab5fecd36 $ 
 
 pdo_sqlite
 
@@ -579,7 +579,7 @@ Phar
 Phar: PHP Archive support => enabled
 Phar EXT version => 2.0.2
 Phar API version => 1.1.1
-SVN revision => $Id: 5c9332ae6a1bbfaff769679849f727f96a83cc89 $
+SVN revision => $Id: 14b80e175ed4d5bf11c890e1f30ea8225935b16c $
 Phar-based phar archives => enabled
 Tar-based phar archives => enabled
 ZIP-based phar archives => enabled
@@ -599,13 +599,13 @@ phar.require_hash => On => On
 Reflection
 
 Reflection => enabled
-Version => $Id: 13fa82dc7f81b596eaa69822751011bc4b8879c4 $
+Version => $Id: fbcf7a77ca8e3d4cd7501de8025235b947b8240f $
 
 session
 
 Session Support => enabled
-Registered save handlers => files user
-Registered serializer handlers => php_serialize php php_binary
+Registered save handlers => files user 
+Registered serializer handlers => php_serialize php php_binary 
 
 Directive => Local Value => Master Value
 session.auto_start => Off => Off
@@ -642,7 +642,7 @@ session.use_trans_sid => 0 => 0
 SimpleXML
 
 Simplexml support => enabled
-Revision => $Id: 81eb4d1df57a422dc4bcf9697a14ecf7f3dcb0fe $
+Revision => $Id: 07fc6546e896094aed794aea4691f0151774d955 $
 Schema support => enabled
 
 sockets
@@ -837,9 +837,9 @@ _SERVER["PHP_SELF"] => phpinfo.php
 _SERVER["SCRIPT_NAME"] => phpinfo.php
 _SERVER["SCRIPT_FILENAME"] => phpinfo.php
 _SERVER["PATH_TRANSLATED"] => phpinfo.php
-_SERVER["DOCUMENT_ROOT"] =>
-_SERVER["REQUEST_TIME_FLOAT"] => 1511972604.4414
-_SERVER["REQUEST_TIME"] => 1511972604
+_SERVER["DOCUMENT_ROOT"] => 
+_SERVER["REQUEST_TIME_FLOAT"] => 1514391887.4059
+_SERVER["REQUEST_TIME"] => 1514391887
 _SERVER["argv"] => Array
 (
     [0] => phpinfo.php
@@ -906,4 +906,3 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 If you did not receive a copy of the PHP license, or have any
 questions about PHP licensing, please contact license@php.net.
-

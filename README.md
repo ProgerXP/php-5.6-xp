@@ -78,6 +78,10 @@ zip
 zlib
 ```
 
+More prebuilt extensions are available [here](https://phpdev.toolsforresearch.com/php-5.6.4-Win32-VC11-x86-xp.zip) ([source](https://www.apachelounge.com/viewtopic.php?p=36701#36701)).
+
+If PHP fails to load extensions - make sure your `%PATH%` doesn't have conflicting versions ([more here](https://github.com/ProgerXP/php-5.6-xp/issues/4)).
+
 ## Enabled SAPIs
 
 ```

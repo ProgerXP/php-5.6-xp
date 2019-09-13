@@ -362,6 +362,12 @@ TLSVar tls_tq_timer = {0};
             tls_set(&tls_tq_timer, tq_timer);
 #endif
 ```
+5. After `if (!CreateTimerQueueTimer(...)) {...}` condition add next lines:
+```
+#ifdef TLS_TQ_TIMER
+    tls_set(&tls_tq_timer, tq_timer);
+#endif
+```
 
 ## V. Build extensions
 

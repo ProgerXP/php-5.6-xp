@@ -1302,6 +1302,9 @@ void zend_set_timeout(long seconds, int reset_signals) /* {{{ */
 		return;
 	}
 	EG(timed_out) = 0;
+#ifdef TLS_TQ_TIMER
+	tls_set(&tls_tq_timer, tq_timer);
+#endif
 #else
 #	ifdef HAVE_SETITIMER
 	{
